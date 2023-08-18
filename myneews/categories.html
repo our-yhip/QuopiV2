@@ -1,0 +1,195 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+</head>
+  <body class="color-blue">
+
+
+
+
+
+<div class="navbar navbar-current">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link back" onclick="goBack()">
+          <i class="icon f7-icons arrow-back">arrow_left</i>
+        </a>
+      </div>
+      <div class="title" style="left: -5px;">Categories</div>
+      <div class="right">
+        <a href="#" class="link">
+          <i class="icon f7-icons single-post-actions">ellipsis_circle_fill</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+    <!-- App root element -->
+    <div class="views tabs">
+ 
+   
+
+
+        <div class="page page-current" style=" padding: 11px; ">
+  
+
+
+
+
+<div class="grid grid-cols-2 grid-gap" id="category-container">
+    <!-- Categories will be dynamically added here -->
+</div>
+
+<script>
+    // Your web app's Firebase configuration
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+        authDomain: "m-bdswiss.firebaseapp.com",
+        databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+        projectId: "m-bdswiss",
+        storageBucket: "m-bdswiss.appspot.com",
+        messagingSenderId: "333486800922",
+        appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+        measurementId: "G-M1LHL1975Q"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+
+
+function loadCategories() {
+    var categoryContainer = document.querySelector('#category-container');
+
+    db.collection('categories').limit().get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var categoryItem = document.createElement('a');
+                // Redirect to category.html with category as a parameter
+                categoryItem.href = `category.html?category=${doc.id}`;
+                categoryItem.className = "category-item link external";
+
+                var img = document.createElement('img');
+                img.src = doc.data().imageUrl;
+                img.alt = doc.data().name;
+
+                var categoryName = document.createElement('div');
+                categoryName.className = "category-name";
+                categoryName.textContent = doc.data().name;
+
+                categoryItem.appendChild(img);
+                categoryItem.appendChild(categoryName);
+                categoryContainer.appendChild(categoryItem);
+            });
+        }).catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+}
+
+// Call the function to load the categories
+loadCategories();
+
+
+
+
+
+
+
+
+
+// create categori
+
+// function populateCategories() {
+//     var categories = ['Travel', 'Health', 'Food', 'Environment', 'Art', 'Science'];
+//     var client_id = 'vZPoDIrMKfeBTWFFTdNyv4zrNrZ-b6OJlRiPyjHYP7Q';
+
+//     categories.forEach((category) => {
+//         // Fetch a random image from Unsplash for each category
+//         fetch(`https://api.unsplash.com/photos/random?client_id=${client_id}`)
+//             .then(response => response.json())
+//             .then(data => {
+//                 // Add the category to Firestore
+//                 db.collection('categories').add({
+//                     name: category,
+//                     imageUrl: data.urls.small
+//                 })
+//                 .then((docRef) => {
+//                     console.log('Document written with ID: ', docRef.id);
+//                 })
+//                 .catch((error) => {
+//                     console.error('Error adding document: ', error);
+//                 });
+//             })
+//             .catch(error => console.log('Error fetching image: ', error));
+//     });
+// }
+
+// populateCategories();
+
+
+</script>
+
+
+
+
+
+
+
+
+</div></div>
+     
+
+      </div>
+
+<script>
+
+// On page load, get the current theme from local storage and apply it
+document.body.className = localStorage.getItem('theme') || 'color-blue';
+
+// Get all switchers
+let switchers = document.querySelectorAll('.theme-switcher');
+
+// Add the click event listener to all switchers
+switchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.className === 'color-blue') {
+            document.body.className = 'color-blue dark';
+            localStorage.setItem('theme', 'color-blue dark');
+        } else {
+            document.body.className = 'color-blue';
+            localStorage.setItem('theme', 'color-blue');
+        }
+
+        // Refresh the page
+        location.reload();
+    });
+});
+
+
+</script>
+    <script src="js/framework7-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  
+
+</body></html>

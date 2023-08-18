@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout and Clear Data</title>
+    <script>
+        function logoutAndClearData() {
+            // Clear localStorage and sessionStorage
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // Redirect to a login page or give a logged-out message
+            document.body.innerHTML = "<h1>You've logged out and cleared local data!</h1>";
+
+            // Note: This does NOT clear browser cache. It just clears locally stored data.
+        }
+    </script>
+</head>
+<body>
+    <!-- Some content for demonstration -->
+    <h1>Welcome to the dashboard</h1>
+    <p>This is a user's content.</p>
+
+    <!-- Button to log out and clear data -->
+    <button onclick="logoutAndClearData()">Logout and Clear Data</button>
+</body>
+</html>

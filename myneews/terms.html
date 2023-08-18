@@ -1,0 +1,125 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+    <style>
+      @keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+    </style>
+</head>
+  <body class="color-blue">
+
+
+
+
+
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+    <!-- App root element -->
+  
+ 
+
+ <div class="page-content">
+  
+
+<h1>Terms of Use for wxcvy</h1>
+
+<p>Last updated: [Date]</p>
+
+<h2>1. Acceptance of Terms</h2>
+<p>By accessing or using the wxcvy app, you agree to be bound by these Terms of Use. If you disagree with any part of the terms, then you may not access the app.</p>
+
+<h2>2. Changes to Terms</h2>
+<p>We reserve the right to modify or replace these Terms at any time. It's your responsibility to check these Terms periodically for changes.</p>
+
+<h2>3. Use of the App</h2>
+<p>You agree not to use the app in any way that is illegal or harms us or any user of our app.</p>
+
+<h2>4. Termination</h2>
+<p>We may terminate or suspend access to our app immediately, without prior notice, for any reason, including without limitation if you breach the Terms.</p>
+
+<h2>5. Limitation of Liability</h2>
+<p>In no event shall wxcvy be liable for any indirect, incidental, special, consequential or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from (a) your access to or use of or inability to access or use the app; (b) any unauthorized access to or use of our servers and/or any personal information stored therein.</p>
+
+<h2>6. Governing Law</h2>
+<p>These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.</p>
+
+<h2>7. Contact Us</h2>
+<p>If you have any questions about these Terms, please contact us at:</p>
+<p>Email: [Your Email Address]</p>
+<p>Address: [Your Address]</p>
+
+
+  </div>
+
+
+   
+
+
+<script>
+
+// On page load, get the current theme from local storage and apply it
+document.body.className = localStorage.getItem('theme') || 'color-blue';
+
+// Get all switchers
+let switchers = document.querySelectorAll('.theme-switcher');
+
+// Add the click event listener to all switchers
+switchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.className === 'color-blue') {
+            document.body.className = 'color-blue dark';
+            localStorage.setItem('theme', 'color-blue dark');
+        } else {
+            document.body.className = 'color-blue';
+            localStorage.setItem('theme', 'color-blue');
+        }
+
+        // Refresh the page
+        location.reload();
+    });
+});
+
+
+</script>
+
+
+    <script src="js/framework7-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  
+
+</body></html>

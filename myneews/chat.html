@@ -1,0 +1,284 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+</head>
+ 
+
+<body class="color-blue">
+
+
+<div class="navbar navbar-current">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon f7-icons arrow-back">arrow_left</i>
+        </a>
+      </div>
+      <div class="title" style="left: -3.5px;">Jack River</div>
+      <div class="right">
+        <a href="#" class="link" onclick="startCallToAllUsers()"><i class="f7-icons text-color-primary">phone_fill</i></a>
+
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+   <div class="page no-toolbar page-current" data-name="chat">
+  
+  <div class="toolbar messagebar messagebar-init">
+    <div class="toolbar-inner">
+      <a class="link toggle-sheet" href="#">
+        <i class="icon f7-icons">camera_fill</i>
+      </a>
+      <div class="messagebar-area">
+        <textarea placeholder="Message"></textarea>
+      </div>
+      <a href="#" class="link send-link"><i class="icon f7-icons">paperplane_fill</i></a>
+    </div>
+  </div>
+  
+
+  <div class="page-content messages-content">
+    <div class="messages full-width">
+    
+      
+
+    </div>
+  </div>
+
+</div>
+<script>
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+    authDomain: "m-bdswiss.firebaseapp.com",
+    databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+    projectId: "m-bdswiss",
+    storageBucket: "m-bdswiss.appspot.com",
+    messagingSenderId: "333486800922",
+    appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+    measurementId: "G-M1LHL1975Q"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+let db = firebase.firestore();
+
+// Generate random guest username and avatar
+let user;
+let username;
+let avatar = "img/avatars/1.jpg"; // default avatar
+
+if(localStorage.getItem("user")) { //check if there's a logged in user
+    user = JSON.parse(localStorage.getItem('user'));
+    username = user.username; //get username from user object in localstorage
+    avatar = user.avatar || avatar; //get avatar from user object in localstorage
+}
+
+function changeUsername(){
+    Swal.fire({
+        title: 'Change Username',
+        input: 'text',
+        inputLabel: 'New Username',
+        inputPlaceholder: 'Enter new username',
+        showCancelButton: true,
+        confirmButtonText: 'Change',
+        preConfirm: (newUsername) => {
+            if (!newUsername) {
+                Swal.showValidationMessage('Username should not be empty')
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            username = result.value;
+            user.username = username;
+            localStorage.setItem("user", JSON.stringify(user));
+            Swal.fire('Success!', 'Username changed successfully!', 'success');
+        }
+    })
+}
+
+let messages = document.querySelector('.messages');
+let newMessageSound = new Audio('call.mp3');
+
+db.collection("chat")
+    .orderBy("timestamp", "desc")
+    .limit(15)
+    .onSnapshot((querySnapshot) => {
+        messages.innerHTML = "";
+        let docs = querySnapshot.docs;
+        // Reverse the messages to display the latest at the bottom
+        for(let i = docs.length - 1; i >= 0; i--) {
+            let message = docs[i].data();
+            if (message.image) {
+                messages.innerHTML += `
+                    <div class="message message-received message-first message-last">
+                        <div class="message-avatar" style="background-image: url('${message.avatar}')"></div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <div class="message-image"><img src="${message.image}" /></div>
+                                <div class="message-text"><b>${message.username}:</b></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messages.innerHTML += `
+                    <div class="message message-received message-first message-last">
+                        <div class="message-avatar" style="background-image: url('${message.avatar}')"></div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <div class="message-text"><b>${message.username}:</b> ${message.text}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        // Scroll to the latest message
+        setTimeout(function() {
+            messages.lastElementChild.scrollIntoView({behavior: 'smooth'});
+            newMessageSound.play();
+        }, 100);
+    });
+
+let sendMessage = document.querySelector('.send-link');
+let imageUpload = document.getElementById('imageUpload');
+
+sendMessage.addEventListener('click', () => {
+    if(localStorage.getItem("user")) { // Check if user is logged in
+        let text = document.querySelector('.messagebar-area textarea').value;
+        if (text.trim() !== '') {
+            db.collection('chat').add({
+                text: text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: avatar,
+                username: username
+            });
+            document.querySelector('.messagebar-area textarea').value = "";
+        }
+    } else {
+        // Redirect to login.html
+        window.location.href = "login.html";
+    }
+});
+
+imageUpload.addEventListener('change', (e) => {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    
+    reader.onloadend = function() {
+        db.collection('chat').add({
+            image: reader.result,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            avatar: avatar,
+            username: username
+        });
+    }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+});
+
+window.onload = function() {
+    document.getElementById('user-avatar').src = avatar;
+    document.getElementById('user-name').textContent = username || "Guest";
+    document.getElementById('user-email').textContent = user ? user.email : "";
+
+    if(!user){
+        let loginLink = document.createElement('a');
+        loginLink.href = "login.html";
+        loginLink.textContent = "Log In";
+        loginLink.className = "link edit-profile-image";
+        
+        document.querySelector('.settings-header').appendChild(loginLink);
+    }
+
+    document.getElementById('edit-avatar-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        let avatarUpload = document.getElementById('avatar-upload');
+        avatarUpload.click();
+
+        avatarUpload.addEventListener('change', function() {
+            let file = avatarUpload.files[0];
+            let reader = new FileReader();
+            
+            reader.onloadend = function() {
+                document.getElementById('user-avatar').src = reader.result;
+                
+                user.avatar = reader.result;
+                avatar = reader.result;
+                localStorage.setItem('user', JSON.stringify(user));
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
+
+}
+
+
+
+function startCallToAllUsers() {
+    const callerId = (user && user.uid) ? user.uid : 'Guest';
+    
+    if(!callerId) {
+        console.error("Caller ID is undefined.");
+        return;
+    }
+    
+    db.collection("calls").add({
+        callerUID: callerId,
+        startTime: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        console.log("Call started!");
+    }).catch((error) => {
+        console.error("Error starting call: ", error);
+    });
+}
+
+
+
+// Listen for incoming calls
+db.collection("calls").onSnapshot(snapshot => {
+    snapshot.docChanges().forEach(change => {
+        if (change.type === "added") {
+            const callData = change.doc.data();
+            
+            const currentUserId = user ? user.uid : 'Guest';
+            if (callData.callerUID !== currentUserId) {
+                alert("Incoming call from " + callData.callerUID);
+                // or any other notification mechanism
+            }
+        }
+    });
+});
+
+
+
+</script>
+
+
+
+
+</body></html>

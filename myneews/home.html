@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="default">
+      <meta name="theme-color" content="#ffffff">
+      <!-- Your app title -->
+      <title>Yui Mobile</title>
+      <link rel="stylesheet" href="css/framework7-bundle.css">
+      <link rel="stylesheet" href="css/framework7-icons.css">
+      <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+<!-- Your script here -->
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+
+      <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script>
+         // Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+    authDomain: "m-bdswiss.firebaseapp.com",
+    databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+    projectId: "m-bdswiss",
+    storageBucket: "m-bdswiss.appspot.com",
+    messagingSenderId: "333486800922",
+    appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+    measurementId: "G-M1LHL1975Q"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+var storage = firebase.storage();
+
+      </script>
+   </head>
+   <body class="color-blue">
+      <!-- App root element -->
+      <div id="app">
+         <!-- Left panel -->
+         <div class="panel panel-left panel-push panel-init">
+            <div class="profile-header">
+               <div class="profile-image">
+                  <img src="img/avatars/1.jpg" alt="">
+                  <div class="profile-online bg-color-green"></div>
+               </div>
+               <div class="profile-name">Noah Campbell</div>
+               <div class="profile-subtitle"><a href="../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="b6d8d5d7dbd4c6d3dadaf6d3d8c0d7c2d998d5d9db">[email&#160;protected]</a></div>
+            </div>
+            <div class="list links-list panel-links">
+               <ul>
+                  <li>
+                     <a href="https://yui.xioyuna.com/profile/" class="panel-close">
+                     <i class="icon f7-icons">person_crop_circle_fill</i>
+                     My Profile
+                     </a>
+                  </li>
+                  <li>
+                     <a href="notifications" class="panel-close">
+                     <i class="icon f7-icons">bell_fill</i>
+                     Notifications
+                     </a>
+                  </li>
+                  <li>
+                     <a href="settings" class="panel-close">
+                     <i class="icon f7-icons">gear_alt_fill</i>
+                     Settings
+                     </a>
+                  </li>
+                  <li>
+                     <a href="https://yui.xioyuna.com/messages/" class="panel-close">
+                     <i class="icon f7-icons">bubble_left_bubble_right_fill</i>
+                     Messages
+                     </a>
+                  </li>
+                  <li>
+                     <a href="https://yui.xioyuna.com/search/" class="panel-close">
+                     <i class="icon f7-icons">search_circle_fill</i>
+                     Search
+                     </a>
+                  </li>
+                  <li>
+                     <a href="https://yui.xioyuna.com/help-center/" class="panel-close">
+                     <i class="icon f7-icons">question_square_fill</i>
+                     Help Center
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <div class="panel-logout">
+               <a href="#" class="link text-color-red">
+               Log Out
+               <i class="icon f7-icons arrow-back text-color-red">square_arrow_right</i>
+               </a>
+            </div>
+         </div>
+         <!-- Views container -->
+         <div class="views tabs">
+           
+
+
+
+
+            <div class="view view-main tab" id="tab-1">
+               <div class="page">
+                  
+
+
+<div class="navbar navbar-large navbar-current">
+                     <div class="navbar-bg"></div>
+                     <div class="navbar-inner">
+                        <div class="left">
+                           <a href="settings" class="link icon-only navbar-profile">
+                           <img src="" alt="">
+                           </a>
+                        </div>
+                        <div class="title" style="left: 14px;">Market cap</div>
+                        <div class="title-large">
+                           <div class="title-large-text">Market cap</div>
+                        </div>
+                        <div class="right">
+                           <a href="#" class="link icon-only switch-theme theme-switcher">
+                           <i class="icon f7-icons">moon_stars</i>
+                           </a>
+                        
+                        <a href="#tab-5" class="tab-link">
+<i class="icon f7-icons tooltip-init" data-tooltip="Setting">gear_alt</i>
+                           </a>
+                           
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <div class="page-content">
+
+    <style>
+ /* Ensure the container doesn't have any borders or lines */
+.iframe-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    border: none;
+    outline: none;
+   
+}
+
+/* Apply styles directly to the iframe and any possible states it might have */
+.iframe-container iframe,
+.iframe-container iframe:focus,
+.iframe-container iframe:active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
+    </style>
+
+
+
+                    <div class="section-title">
+                      
+                        
+                     </div>
+                 
+ 
+
+
+
+
+
+<style>
+    ::-webkit-scrollbar {
+    display: none;
+}
+body {
+    scrollbar-width: none; 
+}
+body {
+    -ms-overflow-style: none; 
+}
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: darkgray;
+}
+.container {
+  height: calc(100vh - 4.5rem);
+  overflow-y: hidden;
+}
+.search-box,
+.filters .filter:not(.filter.active),
+.notification,
+.item .left img {
+  border: 1px solid rgba(209, 213, 219, 1);
+}
+.filters .filter.active {
+  color: rgb(37, 99, 235);
+  background-color: rgb(219, 234, 254);
+  border: none;
+}
+
+.item .crypto-increase i {
+  font-size: 0.3rem;
+}
+
+.item .crypto-increase i.positive-inc {
+  color: #28af7e;
+}
+
+.negative-inc {
+  color: #ef4444;
+  transform: rotate(180deg);
+}
+.notification {
+  position: relative;
+}
+.notification::before {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  right: 0.4rem;
+  top: 0.5rem;
+  background-color: red;
+}
+.navbar {
+  box-shadow: -3px -9px 15px -3px #ebebeb;
+}
+</style>
+
+      
+            <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+      
+
+
+            <!-- items -->
+            <div class="items flex flex-col gap-y-5 overflow-y-auto" style=" padding-top: 58px; ">
+                <!-- crypto items from js -->
+            </div>
+
+  <script>
+      async function getCrypto(){
+    const res = await (await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false")).json()
+    res.slice(0, 50).forEach(coin => {
+    //    console.log(coin)
+         addCrypto(coin);
+    });
+}
+document.addEventListener("DOMContentLoaded", getCrypto);
+
+function addCrypto(coin){
+    let increase = coin.price_change_percentage_24h > 0 ? "green" : "red";
+    let changeIcon = coin.price_change_percentage_24h > 0 ? "positive" : "negative";
+   const coinDiv= document.createElement("div");
+   coinDiv.classList.add("item", "flex" ,"justify-between", "items-center");
+   coinDiv.innerHTML=`
+        <div class="left flex justify-between items-center gap-x-3">
+            <img src=${coin.image}
+            alt="" class="h-11 w-11 rounded-full p-2" style=" width: 50px; height: 50px; ">
+            <div>
+                <p class="crypto-name text-base font-bold">${coin.name}</p>
+                <p class="crypto-abbr text-gray-400">${coin.symbol.toUpperCase()}</p>
+            </div>
+        </div>
+        <div class="text-right ">
+            <p class="crypto-cost text-gray-700 font-semibold text-base">$${coin.current_price}</p>
+            <p class="crypto-increase text-${increase}-500">
+                <i class="fas fa-triangle fa-xs align-middle ${changeIcon}-inc"></i>
+                ${(coin.price_change_percentage_24h).toFixed(2)}%
+            </p>
+        </div>
+   `;
+   document.querySelector(".items").appendChild(coinDiv);
+}
+  </script>
+
+</body>
+</html>
+        
+
+
+<!--                      <swiper-container id="boooks" class="full-width" slides-per-view="2.4" space-between="15" slides-offset-after="15" slides-offset-before="15" speed="400">
+                     </swiper-container>
+                     <script>
+                        var swiperContainer = document.querySelector('#boooks');
+                        
+                        db.collection('books')
+                            .orderBy('timestamp', 'desc')
+                            .limit(4)
+                            .get()
+                            .then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    var book = doc.data();
+                                    var swiperSlide = document.createElement('swiper-slide');
+                                    swiperSlide.setAttribute("id", "boooks-slider");
+                                    swiperSlide.innerHTML = `
+                                        <a href="book.html?id=${doc.id}"  class="card card-movie external">
+                                            <div class="card-image">
+                                                <img src="${book.cover}" alt="${book.title}">
+                                                <div class="card-movie-rating">
+                                                    <i class="icon f7-icons text-color-yellow">star_fill</i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    `;
+                                    swiperContainer.appendChild(swiperSlide);
+                                });
+                            })
+                            .catch(error => console.error(error));
+                     </script>
+ -->
+
+
+
+
+
+                     <div class="section-title">
+                        Users
+                        <a href="" class="link"> </a>
+                     </div>
+                     <div id="users" class="grid grid-cols-2 album-grid">
+                     </div>
+                     <script>
+        var authorsContainer = document.querySelector('#users');
+                        
+var authorsContainer = document.querySelector('#users');
+                        
+db.collection('users')
+    .orderBy("username") // assumes 'username' as the field to sort by
+    .limit(4) // only get the latest 4 authors
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            var users = doc.data();
+            var usersElement = document.createElement('a');
+            usersElement.href = "/users/" + doc.id; // use doc.id to get the unique identifier
+            usersElement.className = "link";
+            usersElement.innerHTML = `
+                <img src="${users.avatar}" alt="${users.username}"  style=" border-radius: 100%; ">
+                <div class="album-details">
+                    <div class="album-title">${users.username}</div>
+                    <div class="album-author">${users.Occupation}</div> 
+                </div>
+            `;
+            authorsContainer.appendChild(usersElement);
+        });
+    })
+    .catch(error => console.error(error));
+
+                     </script>
+                
+
+
+
+
+
+
+
+<!-- 
+                     <div class="section-title">
+                        Today's Events
+                        <a href="https://yui.xioyuna.com/event-list/" class="link">View All</a>
+                     </div>
+                    -->
+
+<!--                      <div class="list detailed-list list-dividers full-width">
+                        <ul>
+                           <li>
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-media"><img src="img/events/1.jpg" class="event-thumbnail" alt=""></div>
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-name">Art Exhibition</div>
+                                       <div class="item-footer">Museum of Art, New York City</div>
+                                    </div>
+                                    <div class="item-after"><span class="badge color-dark">9:00 AM</span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-media"><img src="img/events/2.jpg" class="event-thumbnail" alt=""></div>
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-name">Jay-Z Concert</div>
+                                       <div class="item-footer">Staples Center, Los Angeles</div>
+                                    </div>
+                                    <div class="item-after"><span class="badge color-dark">4:00 PM</span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-media"><img src="img/events/3.jpg" class="event-thumbnail" alt=""></div>
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-name">Comedy Show</div>
+                                       <div class="item-footer">The Laugh Club, Chicago</div>
+                                    </div>
+                                    <div class="item-after"><span class="badge color-dark">6:30 PM</span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-media"><img src="img/events/4.jpg" class="event-thumbnail" alt=""></div>
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-name">Dance Performance</div>
+                                       <div class="item-footer">Opera House, Sydney</div>
+                                    </div>
+                                    <div class="item-after"><span class="badge color-dark">8:00 PM</span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-media"><img src="img/events/5.jpg" class="event-thumbnail" alt=""></div>
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-name">Hard Rock Concert</div>
+                                       <div class="item-footer">O2 Arena, London</div>
+                                    </div>
+                                    <div class="item-after"><span class="badge color-dark">9:30 PM</span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                        </ul>
+                     </div> -->
+
+
+
+
+
+
+                     <div class="section-title">
+                        <span id="random-category-name-two"></span>
+                        <a href="" id="view-all-link-two" class="link external">View All</a>
+                     </div>
+                     <div class="post-list" id="random-category-news-two">
+                        <!-- News Items Go Here -->
+                     </div>
+                     <script>
+                        // Your web app's Firebase configuration
+                        
+                        
+                        document.addEventListener("DOMContentLoaded", function() {
+                            db.collection('categories').get().then((querySnapshot) => {
+                                var categories = querySnapshot.docs;
+                                var randomIndex = Math.floor(Math.random() * categories.length);
+                                var randomCategory = categories[randomIndex];
+                                document.getElementById("random-category-name-two").textContent = "In " + randomCategory.data().name;
+                                var viewAllLink = document.getElementById("view-all-link-two");
+                                if (viewAllLink) {
+                                    viewAllLink.href = "category.html?category=" + randomCategory.id;
+                                }
+                                displayNews(randomCategory.id);
+                            });
+                        
+                        
+                            function displayNews(categoryID) {
+                                db.collection("news").where("categoryID", "==", categoryID).orderBy('date', 'desc').limit(3).get().then((querySnapshot) => {
+                                    querySnapshot.forEach((doc) => {
+                                        var newsContainer = document.querySelector('#random-category-news-two');
+                        
+                                        var newsEntry = document.createElement('a');
+                                        newsEntry.href = "single.html?id=" + doc.id;
+                                        newsEntry.className = "link post-horizontal external";
+                        
+                                        var infos = document.createElement('div');
+                                        infos.className = "infos";
+                        
+                                        var category = document.createElement('div');
+                                        category.className = "post-category";
+                                        category.textContent = doc.data().category;
+                                        infos.appendChild(category);
+                        
+                                        var title = document.createElement('div');
+                                        title.className = "post-title";
+                                        title.textContent = doc.data().title;
+                                        infos.appendChild(title);
+                        
+                                        var date = document.createElement('div');
+                                        date.className = "post-date";
+                                        date.textContent = new Date(doc.data().date).toLocaleDateString();
+                                        infos.appendChild(date);
+                        
+                                        newsEntry.appendChild(infos);
+                        
+                                        var image = document.createElement('div');
+                                        image.className = "post-image";
+                        
+                                        var img = document.createElement('img');
+                                        img.src = doc.data().image;
+                                        image.appendChild(img);
+                        
+                                        newsEntry.appendChild(image);
+                        
+                                        newsContainer.appendChild(newsEntry);
+                                    });
+                                });
+                            }
+                        });
+                     </script>
+                  </div>
+               </div>
+            </div>
+
+
+            <div class="view view-init tab tab-active view-init" id="tab-2">
+               <div class="page">
+                
+
+
+
+                  <div class="navbar navbar-large" id="navbar-of-latest">
+                     <div class="navbar-bg"></div>
+                     <div class="navbar-inner">
+                        <div class="left">
+                           <a href="settings" class="link icon-only navbar-profile">
+                           <img src="img/avatars/small-avatar.jpg" alt="">
+                           </a>
+                        </div>
+                        <div class="title">Latest Posts</div>
+                        <div class="title-large">
+                           <div class="title-large-text">Latest Posts</div>
+                        </div>
+                        <div class="right">
+                           <a href="#" class="link icon-only switch-theme theme-switcher">
+                           <i class="icon f7-icons">moon_stars</i>
+                           </a>
+                        
+                        <a href="#tab-5" class="tab-link" >
+<i class="icon f7-icons tooltip-init" data-tooltip="Setting">gear_alt</i>
+                           </a>
+
+                        </div>
+                     </div>
+                  </div>
+                 
+<style>
+   @keyframes placeHolderShimmer {
+  0% {
+    background-position: -800px 0
+  }
+  100% {
+    background-position: 800px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background-color: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 70px;
+  position: relative;
+}
+
+.background-masker {
+  background-color: #fff;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.btn-divide-left {
+  top: 0;
+  left: 25%;
+  height: 100%;
+  width: 5%;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+</style>
+
+<style>
+    #iframeContainerx button {
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 10001;
+    }
+</style>
+
+<div class="page-content">
+    <swiper-container class="full-width swiper-initialized swiper-horizontal swiper-ios swiper-backface-hidden" slides-per-view="1.2" space-between="15" slides-offset-after="15" slides-offset-before="15" speed="400">
+        <!-- Sample slides (can be dynamically generated) -->
+        <div class="swiper-slide" role="group" aria-label="1 / 2" style="width: 342.5px; margin-right: 15px; margin-left: 10px;">
+            <a href="#" class="card external">
+                <div class="card-image">
+                    <div class="animated-background" style="height: 214px; width: 100%;"></div>
+                    <div class="card-image-footer">
+                        <div style="height: 20px; width: 100px;"></div>
+                        <div class="b" style="height: 30px; margin-top: 10px;"></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+<div class="swiper-slide swiper-slide-active" role="group" aria-label="2 / 2" style="width: 342.5px; margin-right: 15px; margin-left: 10px;">
+  <a href="#" class="card external">
+    <div class="card-image">
+      <!-- Use a div to replace the image with a specific height -->
+      <div class="animated-background" style="height: 214px; width: 100%;"></div>
+      <div class="card-image-footer">
+        <div class="" style="height: 20px; width: 100px;"></div> <!-- replace the category with a placeholder -->
+        <div class="b" style="height: 30px; margin-top: 10px;"></div> <!-- replace the title with a placeholder -->
+      </div>
+    </div>
+  </a>
+</div>
+    <span class="swiper-notification" aria-live="assertive" aria-atomic="true" slot="container-end"></span>
+ </swiper-container>
+
+<script>
+function loadLatestNews() {
+    var swiperContainer = document.querySelector('swiper-container');
+
+    db.collection('news')
+        .orderBy('date', 'desc')
+        .limit(3)
+        .get()
+        .then((querySnapshot) => {
+            // Clear the default slide
+            swiperContainer.innerHTML = '';
+
+            querySnapshot.forEach((doc, index) => {
+                // Create swiper-slide div
+                var swiperSlide = document.createElement('div');
+                swiperSlide.setAttribute('role', 'group');
+                swiperSlide.setAttribute('aria-label', `${index + 1} / 3`);
+                swiperSlide.className = 'swiper-slide';
+                swiperSlide.style = 'width: 342.5px; margin-right: 15px;';
+
+                // Create the link
+                var link = document.createElement('a');
+                link.setAttribute('onclick', `showIframex('single.html?id=${doc.id}')`);
+                link.className = "card external";
+             
+
+                // Create card image container
+                var cardImage = document.createElement('div');
+                cardImage.className = "card-image";
+
+                var img = document.createElement('img');
+                img.src = doc.data().image;
+                img.alt = doc.data().title;  // It's a good practice to use title or a description for alt
+
+                // Create card footer
+                var cardImageFooter = document.createElement('div');
+                cardImageFooter.className = "card-image-footer";
+
+                var cardCategory = document.createElement('div');
+                cardCategory.className = "card-category bg-color-white";
+                cardCategory.textContent = doc.data().categoryName;
+
+                var title = document.createElement('h2');
+                title.textContent = doc.data().title;
+
+                cardImageFooter.appendChild(cardCategory);
+                cardImageFooter.appendChild(title);
+
+                cardImage.appendChild(img);
+                cardImage.appendChild(cardImageFooter);
+
+                link.appendChild(cardImage);
+
+                swiperSlide.appendChild(link);
+
+                swiperContainer.appendChild(swiperSlide);
+            });
+
+            // Initialize Swiper after dynamically adding slides
+            if (swiperContainer.swiper) {
+                swiperContainer.swiper.update();
+            } else {
+                new Swiper(swiperContainer, {
+                    slidesPerView: '1.2',
+                    spaceBetween: 15,
+                    slidesOffsetAfter: 15,
+                    slidesOffsetBefore: 15,
+                    speed: 400
+                });
+            }
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+}
+
+// Call the function to load the news
+loadLatestNews();
+</script>
+
+
+    <div id="iframeContainerx" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;">
+        <iframe id="contentIframex" style="width: 100%; height: 100%; border: none;"></iframe>
+        <button onclick="closeIframex()" style="position: absolute; top: 10px; right: 10px; z-index: 10001;">X</button>
+    </div>
+
+    <script>
+function showIframex(url) {
+    document.getElementById('contentIframex').src = url;
+    document.getElementById('iframeContainerx').style.display = 'block';
+     document.getElementById('navbar-of-latest').style.display = 'none';
+}
+
+function closeIframex() {
+    document.getElementById('iframeContainerx').style.display = 'none';
+     document.getElementById('navbar-of-latest').style.display = 'block';
+}
+
+    </script>
+
+
+
+                     <div class="section-title">
+                        Popular Posts
+                        <a href="categories.html" class="link external">View All</a>
+                     </div>
+
+<div class="post-list" id="popular-news"></div>
+
+
+                     <script>
+      function loadPopularNews() {
+  var popularNewsContainer = document.querySelector('#popular-news');
+
+  // Display 3 skeleton loaders while fetching the data
+  for (var i = 0; i < 3; i++) {
+    popularNewsContainer.innerHTML += `
+    <div class="link post-horizontal external">
+      <div class="infos">
+        <div class="animated-background" style="height: 20px; width: 50px; margin-bottom: 5px;"></div>
+        <div class="animated-background" style="height: 30px; width: 100%; margin-bottom: 5px;"></div>
+        <div class="animated-background" style="height: 20px; width: 70px;"></div>
+      </div>
+      <div class="post-image">
+        <div class="animated-background" style="height: 100px; width: 100px;"></div>
+      </div>
+    </div>`;
+  }
+
+  // Fetch the top 3 popular news from Firestore
+  db.collection('news').orderBy('views', 'desc').limit(3).get()
+    .then((querySnapshot) => {
+      // Clear the skeleton loaders
+      popularNewsContainer.innerHTML = '';
+
+      // Add the actual news items
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data());  // Add this line
+        var newsItem = document.createElement('a');
+        newsItem.href = "single.html?id=" + doc.id;
+        newsItem.classList.add("link", "post-horizontal", "external");
+
+        var infos = document.createElement('div');
+        infos.classList.add('infos');
+
+        var category = document.createElement('div');
+        category.classList.add('post-category');
+        category.textContent = doc.data().category;
+
+        var title = document.createElement('div');
+        title.classList.add('post-title');
+        title.textContent = doc.data().title;
+
+        var date = document.createElement('div');
+        date.classList.add('post-date');
+        date.textContent = doc.data().date;
+
+        var imgContainer = document.createElement('div');
+        imgContainer.classList.add('post-image');
+
+        var img = document.createElement('img');
+        img.src = doc.data().image;
+        img.alt = "";
+
+        imgContainer.appendChild(img);
+        infos.appendChild(category);
+        infos.appendChild(title);
+        infos.appendChild(date);
+        newsItem.appendChild(infos);
+        newsItem.appendChild(imgContainer);
+        popularNewsContainer.appendChild(newsItem);
+      });
+    }).catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+}
+
+// Call the function to load the popular news
+loadPopularNews();
+
+                            
+                     </script>
+ 
+
+
+
+
+
+                     <div class="section-title">Post Of The Month</div>
+                    
+                     <a id="postofmonth" href="https://yui.xioyuna.com/single/" class="card">
+                        <div class="card-image">
+                           <img src="img/cards/5.jpg" alt="">
+                           <div class="card-image-footer">
+                              <div class="card-category bg-color-white">Science</div>
+                              <h2>Exploring the Adaptations and Behaviors of these Majestic Birds</h2>
+                           </div>
+                        </div>
+                     </a>
+<script>
+
+function loadRandomNews() {
+    const db = firebase.firestore();  // Ensure Firebase is properly initialized elsewhere in your code
+    
+    // Create a reference to the news collection
+    var newsRef = db.collection('news');
+    
+    // Fetch all document IDs (for better performance, maintain a separate array or list of IDs)
+    newsRef.get().then(snapshot => {
+        var allIds = snapshot.docs.map(doc => doc.id);
+        
+        // Get a random ID
+        var randomDocId = allIds[Math.floor(Math.random() * allIds.length)];
+
+        // Fetch the random document by its ID
+        return newsRef.doc(randomDocId).get();
+    }).then(doc => {
+        if (doc.exists) {
+            const newsData = doc.data();
+
+            // Assuming you have an existing anchor tag with id "postofmonth" in your HTML
+            const newsElement = document.getElementById('postofmonth');
+
+            // Update the href with the news link
+            newsElement.href = "single.html?id=" + doc.id;
+
+            // Update the image and its content based on fetched news data
+            const cardImageDiv = newsElement.querySelector('.card-image');
+            const newsImage = cardImageDiv.querySelector('img');
+            newsImage.src = newsData.image || "img/cards/4.jpg"; // Use default image if news does not have one
+            
+            const cardImageFooterDiv = cardImageDiv.querySelector('.card-image-footer');
+            
+            const cardCategoryDiv = cardImageFooterDiv.querySelector('.card-category');
+            cardCategoryDiv.textContent = newsData.categoryName || "Unknown Category";
+            
+            const newsTitle = cardImageFooterDiv.querySelector('h2');
+            newsTitle.textContent = newsData.title || "Unknown Title";
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(error => {
+        console.log("Error getting random news:", error);
+    });
+}
+
+// Call the function to load the random news
+loadRandomNews();
+
+</script>
+
+
+
+
+
+
+                     <div class="section-title">
+                        <span id="random-category-name"></span>
+                        <a href="" id="view-all-link" class="link external">View All</a>
+                     </div>
+                     <div class="post-list" id="random-category-news">
+                        <!-- News Items Go Here -->
+                     </div>
+                     <script>
+                        // Your web app's Firebase configuration
+                       document.addEventListener("DOMContentLoaded", function() {
+    var newsContainer = document.querySelector('#random-category-news');
+    
+    // Display 3 skeleton loaders while fetching the data
+    for (var i = 0; i < 3; i++) {
+        newsContainer.innerHTML += `
+        <div class="link post-horizontal external">
+          <div class="infos">
+            <div class="animated-background" style="height: 20px; width: 50px; margin-bottom: 5px;"></div>
+            <div class="animated-background" style="height: 30px; width: 100%; margin-bottom: 5px;"></div>
+            <div class="animated-background" style="height: 20px; width: 70px;"></div>
+          </div>
+          <div class="post-image">
+            <div class="animated-background" style="height: 100px; width: 100px;"></div>
+          </div>
+        </div>`;
+    }
+
+    db.collection('categories').get().then((querySnapshot) => {
+        var categories = querySnapshot.docs;
+        var randomIndex = Math.floor(Math.random() * categories.length);
+        var randomCategory = categories[randomIndex];
+        document.getElementById("random-category-name").textContent = "In " + randomCategory.data().name;
+        var viewAllLink = document.getElementById("view-all-link");
+        if (viewAllLink) {
+            viewAllLink.href = "category.html?category=" + randomCategory.id;
+        }
+        displayNews(randomCategory.id);
+    });
+
+
+    function displayNews(categoryID) {
+        db.collection("news").where("categoryID", "==", categoryID).orderBy('date', 'desc').limit(3).get().then((querySnapshot) => {
+            // Clear the skeleton loaders
+            newsContainer.innerHTML = '';
+
+            // Add the actual news items
+            querySnapshot.forEach((doc) => {
+                var newsEntry = document.createElement('a');
+                newsEntry.href = "single.html?id=" + doc.id;
+                newsEntry.className = "link post-horizontal external";
+
+                var infos = document.createElement('div');
+                infos.className = "infos";
+
+                var category = document.createElement('div');
+                category.className = "post-category";
+                category.textContent = doc.data().category;
+                infos.appendChild(category);
+
+                var title = document.createElement('div');
+                title.className = "post-title";
+                title.textContent = doc.data().title;
+                infos.appendChild(title);
+
+                var date = document.createElement('div');
+                date.className = "post-date";
+                date.textContent = new Date(doc.data().date).toLocaleDateString();
+                infos.appendChild(date);
+
+                newsEntry.appendChild(infos);
+
+                var image = document.createElement('div');
+                image.className = "post-image";
+
+                var img = document.createElement('img');
+                img.src = doc.data().image;
+                image.appendChild(img);
+
+                newsEntry.appendChild(image);
+
+                newsContainer.appendChild(newsEntry);
+            });
+        });
+    }
+});
+
+                     </script>
+               
+
+
+
+
+                     <div class="section-title">
+                        Suggested Categories
+                        <a href="categories.html" class="link external">Browse All</a>
+                     </div>
+                     <div class="grid grid-cols-2 grid-gap" id="category-container">
+                        <!-- Categories will be dynamically added here -->
+                     </div>
+                     <script>
+                        // Your web app's Firebase configuration
+                        
+                        
+                        function loadCategories() {
+                        var categoryContainer = document.querySelector('#category-container');
+                        
+                        db.collection('categories').limit(6).get()
+                            .then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    var categoryItem = document.createElement('a');
+                                    // Redirect to category.html with category as a parameter
+                                    categoryItem.href = `category.html?category=${doc.id}`;
+                                    categoryItem.className = "category-item link external";
+                        
+                                    var img = document.createElement('img');
+                                    img.src = doc.data().imageUrl;
+                                    img.alt = doc.data().name;
+                        
+                                    var categoryName = document.createElement('div');
+                                    categoryName.className = "category-name";
+                                    categoryName.textContent = doc.data().name;
+                        
+                                    categoryItem.appendChild(img);
+                                    categoryItem.appendChild(categoryName);
+                                    categoryContainer.appendChild(categoryItem);
+                                });
+                            }).catch((error) => {
+                                console.log("Error getting documents: ", error);
+                            });
+                        }
+                        
+                        // Call the function to load the categories
+                        loadCategories();
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        // create categori
+                        
+                        // function populateCategories() {
+                        //     var categories = ['Travel', 'Health', 'Food', 'Environment', 'Art', 'Science'];
+                        //     var client_id = 'vZPoDIrMKfeBTWFFTdNyv4zrNrZ-b6OJlRiPyjHYP7Q';
+                        
+                        //     categories.forEach((category) => {
+                        //         // Fetch a random image from Unsplash for each category
+                        //         fetch(`https://api.unsplash.com/photos/random?client_id=${client_id}`)
+                        //             .then(response => response.json())
+                        //             .then(data => {
+                        //                 // Add the category to Firestore
+                        //                 db.collection('categories').add({
+                        //                     name: category,
+                        //                     imageUrl: data.urls.small
+                        //                 })
+                        //                 .then((docRef) => {
+                        //                     console.log('Document written with ID: ', docRef.id);
+                        //                 })
+                        //                 .catch((error) => {
+                        //                     console.error('Error adding document: ', error);
+                        //                 });
+                        //             })
+                        //             .catch(error => console.log('Error fetching image: ', error));
+                        //     });
+                        // }
+                        
+                        // populateCategories();
+                        
+                        
+                     </script>
+                  </div>
+               </div>
+            </div>
+
+
+
+
+
+
+            <div class="view view-init tab" id="tab-3">
+               <div class="page">
+                  <div class="navbar navbar-large">
+                     <div class="navbar-bg"></div>
+                     <div class="navbar-inner">
+                        <div class="left">
+                           <a href="settings" class="link icon-only navbar-profile">
+                           <img src="img/avatars/small-avatar.jpg" alt="">
+                           </a>
+                        </div>
+                        <div class="title">Chat</div>
+                        <div class="title-large">
+                           <div class="title-large-text">Chat</div>
+                        </div>
+                        <div class="right">
+                           <a href="#" class="link icon-only switch-theme theme-switcher">
+                           <i class="icon f7-icons">moon_stars</i>
+                           </a>
+<a href="notifications" class="link icon-only" onclick="changeUsername()">
+ <i class="icon f7-icons tooltip-init" data-tooltip="gear_alt">gear_alt</i>
+</a>
+
+
+
+
+                        </div>
+                     </div>
+                  </div>
+
+
+<div class="page no-toolbar page-current" data-name="chat">
+  <div class="toolbar messagebar messagebar-init" style="margin-bottom: 50px;">
+    <div class="toolbar-inner">
+      <input type="file" id="imageUpload" accept="image/*" style="display: none">
+      <a class="link" onclick="document.getElementById('imageUpload').click()">
+        <i class="icon f7-icons">camera_fill</i>
+      </a>
+      <div class="messagebar-area">
+        <textarea placeholder="Message"></textarea>
+      </div>
+      <a href="#" class="link send-link">
+        <i class="icon f7-icons">paperplane_fill</i>
+      </a>
+    </div>
+  </div>
+
+
+
+  <div class="page-content messages-content">
+
+    <div class="messages full-width" style="margin-bottom: 50px;"></div>
+  </div>
+
+</div>
+
+
+
+<script>
+
+let user;
+let username;
+let avatar = "img/avatars/1.jpg"; // default avatar
+
+if(localStorage.getItem("user")) { //check if there's a logged in user
+    user = JSON.parse(localStorage.getItem('user'));
+    username = user.username; //get username from user object in localstorage
+    avatar = user.avatar || avatar; //get avatar from user object in localstorage
+}
+
+function changeUsername(){
+    Swal.fire({
+        title: 'Change Username',
+        input: 'text',
+        inputLabel: 'New Username',
+        inputPlaceholder: 'Enter new username',
+        showCancelButton: true,
+        confirmButtonText: 'Change',
+        preConfirm: (newUsername) => {
+            if (!newUsername) {
+                Swal.showValidationMessage('Username should not be empty')
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            username = result.value;
+            user.username = username;
+            localStorage.setItem("user", JSON.stringify(user));
+            Swal.fire('Success!', 'Username changed successfully!', 'success');
+        }
+    })
+}
+
+let messages = document.querySelector('.messages');
+let newMessageSound = new Audio('notif.mp3');
+
+db.collection("chat")
+    .orderBy("timestamp", "desc")
+    .limit(15)
+    .onSnapshot((querySnapshot) => {
+        messages.innerHTML = "";
+        let docs = querySnapshot.docs;
+        // Reverse the messages to display the latest at the bottom
+        for(let i = docs.length - 1; i >= 0; i--) {
+            let message = docs[i].data();
+            if (message.image) {
+                messages.innerHTML += `
+                    <div class="message message-received message-first message-last">
+                        <div class="message-avatar" style="background-image: url('${message.avatar}')"></div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <div class="message-image"><img src="${message.image}" /></div>
+                                <div class="message-text"><b>${message.username}:</b></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messages.innerHTML += `
+                    <div class="message message-received message-first message-last">
+                        <div class="message-avatar" style="background-image: url('${message.avatar}')"></div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <div class="message-text"><b>${message.username}:</b> ${message.text}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        // Scroll to the latest message
+        setTimeout(function() {
+            messages.lastElementChild.scrollIntoView({behavior: 'smooth'});
+            newMessageSound.play();
+        }, 100);
+    });
+
+let sendMessage = document.querySelector('.send-link');
+let imageUpload = document.getElementById('imageUpload');
+
+sendMessage.addEventListener('click', () => {
+    if(localStorage.getItem("user")) { // Check if user is logged in
+        let text = document.querySelector('.messagebar-area textarea').value;
+        if (text.trim() !== '') {
+            db.collection('chat').add({
+                text: text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                avatar: avatar,
+                username: username
+            });
+            document.querySelector('.messagebar-area textarea').value = "";
+        }
+    } else {
+        // Redirect to login.html
+        window.location.href = "login.html";
+    }
+});
+
+imageUpload.addEventListener('change', (e) => {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    
+    reader.onloadend = function() {
+        db.collection('chat').add({
+            image: reader.result,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            avatar: avatar,
+            username: username
+        });
+    }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+});
+
+window.onload = function() {
+    document.getElementById('user-avatar').src = avatar;
+    document.getElementById('user-name').textContent = username || "Guest";
+    document.getElementById('user-email').textContent = user ? user.email : "";
+
+    if(!user){
+        let loginLink = document.createElement('a');
+        loginLink.href = "login.html";
+        loginLink.textContent = "Log In";
+        loginLink.className = "link edit-profile-image";
+        
+        document.querySelector('.settings-header').appendChild(loginLink);
+    }
+
+    document.getElementById('edit-avatar-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        let avatarUpload = document.getElementById('avatar-upload');
+        avatarUpload.click();
+
+        avatarUpload.addEventListener('change', function() {
+            let file = avatarUpload.files[0];
+            let reader = new FileReader();
+            
+            reader.onloadend = function() {
+                document.getElementById('user-avatar').src = reader.result;
+                
+                user.avatar = reader.result;
+                avatar = reader.result;
+                localStorage.setItem('user', JSON.stringify(user));
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
+}
+
+
+</script>
+
+
+               </div>
+            </div>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="view view-init tab" id="tab-4">
+               <div class="page">
+                  <div class="navbar navbar-large">
+                     <div class="navbar-bg"></div>
+                     <div class="navbar-inner">
+                        <div class="left">
+                           <a href="settings" class="link icon-only navbar-profile">
+                           <img src="img/avatars/small-avatar.jpg" alt="">
+                           </a>
+                        </div>
+                        <div class="title">Stories Archive</div>
+                        <div class="title-large">
+                           <div class="title-large-text">Stories Archive</div>
+                        </div>
+                        <div class="right">
+                           <a href="#" class="link icon-only switch-theme theme-switcher">
+                           <i class="icon f7-icons">moon_stars</i>
+                           </a>
+
+                       <a href="#tab-5" class="tab-link" >
+<i class="icon f7-icons tooltip-init" data-tooltip="Setting">gear_alt</i>
+                           </a>
+
+                        </div>
+                     </div>
+                  </div>
+                  
+
+
+ <style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+#external-content {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;  /* Add this line */
+}
+
+
+    .iframe-button {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      
+        color: #fff;
+        border: none;
+        z-index: 10;
+        border-radius: 20%;
+        padding-bottom: 50px;
+    }
+
+    #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 2;
+    }
+
+    .button-icon {
+    height: 20px; /* adjust as necessary */
+    width: 20px;  /* adjust as necessary */
+    vertical-align: middle;
+    margin: 0 5px;  /* Add some spacing on both sides */
+}
+
+</style>
+
+<div id="overlay" onmousedown="return false;" ontouchstart="return false;" class="page-content">
+
+
+
+
+<script>
+    // List of websites
+        var websites = [
+         "https://coingape.com/web-stories/twitter-is-now-worth-just-33-of-elon-musks-purchase-price",
+        "https://coingape.com/web-stories/will-cramer-curse-strike-again",
+        "https://coingape.com/web-stories/mercedes-benz-to-release-nft-collection-with-fingerprints-dao",
+        "https://coingape.com/web-stories/cardano-dex-minswap-sees-volume-jump-driven-by-snek-bank-meme-coins",
+        "https://coingape.com/web-stories/bitcoin-ether-dip-xrp-rises-post-us-debt-ceiling",
+        "https://coingape.com/web-stories/top-china-coins-to-buy-as-hong-kong-opens-crypto-trading",
+        "https://coingape.com/web-stories/bitcoin-jumps-to-more-than-two-week-high-on-relief-over-us-debt-ceiling",
+        "https://coingape.com/web-stories/xrp-new-value-report-boosts-altcoin-forecast-100x",
+        "https://coingape.com/web-stories/bitcoin-price-could-reach-45000-says-jpmorgan",
+        "https://coingape.com/web-stories/top-five-crypto-rug-pull-scams-2",
+        "https://coingape.com/web-stories/is-cardanos-snek-the-new-dogecoin",
+        "https://coingape.com/web-stories/south-korean-public-officials-ordered-to-disclose-crypto-holdings",
+        "https://coingape.com/web-stories/nvidia-up-by-190-since-cramer-trashed-it-eight-months-ago",
+        "https://coingape.com/web-stories/lunc-to-hit-0-1-after-terra-classics-recent-upgrade",
+        "https://coingape.com/web-stories/shaqs-ftx-lawsuit-is-curry-the-influence",
+        "https://coingape.com/web-stories/solana-becomes-the-first-to-integrate-ai-with-chatgpt-copy",
+        "https://coingape.com/web-stories/solana-becomes-the-first-layer-1-blockchain-to-integrate-ai-with-chatgpt",
+        "https://coingape.com/web-stories/shib-burn-rate-up-by-nearly-2400",
+        "https://coingape.com/web-stories/fake-pentagon-ai-image-wipes-out-500b-in-minutes",
+        "https://coingape.com/web-stories/bad-news-for-shib-holders-is-pepe-the-next-shiba-inu",
+        "https://coingape.com/web-stories/crypto-price-prediction-btc-eth-and-more",
+        "https://coingape.com/web-stories/emerging-technologies-that-can-cause-cryptos-next-big-boom-chatgpt",
+        "https://coingape.com/web-stories/over-50m-shib-burnt-in-the-last-24-hours",
+        "https://coingape.com/web-stories/first-us-presidential-candidate-to-accept-bitcoin-donations",
+        "https://coingape.com/web-stories/top-10-trending-coins-today",
+        "https://coingape.com/web-stories/anthony-hopkins-starring-movie-released-as-nft-shines-at-cannes",
+        "https://coingape.com/web-stories/top-5-meme-coins-of-2023-so-far",
+        "https://coingape.com/web-stories/ledger-co-founder-apologizes-for-the-pr-disaster",
+        "https://coingape.com/web-stories/tiktok-ban-in-us-state",
+        "https://coingape.com/web-stories/top-crypto-gainers-today",
+        "https://coingape.com/web-stories/meta-and-bmw-to-revolutionize-traveling-with-vr",
+        "https://coingape.com/web-stories/top-trending-nft-collections",
+        "https://coingape.com/web-stories/top-crypto-metaverse-tokens-under-1",
+        "https://coingape.com/web-stories/a-look-at-us-secret-services-nft-collection",
+        "https://coingape.com/web-stories/top-trending-cryptocurrencies-today",
+        "https://coingape.com/web-stories/twitter-will-compete-with-traditional-financial-system-confirms-elon-musk",
+        "https://coingape.com/web-stories/mattel-set-to-release-its-new-fast-furious-nft-series",
+        "https://coingape.com/web-stories/elon-musk-acquires-a-recruiting-startup-via-twitter",
+        "https://coingape.com/web-stories/shib-burn-rate-soars-26500-shib-price-to-pump-soon",
+        "https://coingape.com/web-stories/top-7-crypto-gainers-today",
+        "https://coingape.com/web-stories/bitcoin-price-racing-towards-36000-analysts-suggest",
+        "https://coingape.com/web-stories/jim-cramers-latest-prediction-leaves-everyone-worried",
+        "https://coingape.com/web-stories/cz-unfollows-elon-musk-on-twitter-tension-between-billionaires",
+        "https://coingape.com/web-stories/7-best-move-to-earn-crypto-to-invest-in-2023",
+        "https://coingape.com/web-stories/top-7-trending-cryptocurrencies-today",
+        "https://coingape.com/web-stories/best-gaming-crypto-coins-to-invest-in-2023",
+        "https://coingape.com/web-stories/8-differences-between-openais-gpt-and-googles-bard",
+        "https://coingape.com/web-stories/elon-musk-says-he-will-devote-more-time-to-tesla-now",
+        "https://coingape.com/web-stories/9-companies-elon-musk-co-founded-or-owns",
+        "https://coingape.com/web-stories/heres-who-may-replace-elon-musk-as-twitter-ceo",
+        "https://coingape.com/web-stories/french-crypto-trader-jailed-after-buying-ferrari-with-bitcoin",
+        "https://coingape.com/web-stories/best-crypto-under-1-to-buy-in-2023",
+        "https://coingape.com/web-stories/elon-musk-answers-twitter-users-doubts-over-new-ceo",
+        "https://coingape.com/web-stories/top-7-global-companies-working-on-metaverse-development",
+        "https://coingape.com/web-stories/top-7-trending-nft-tokens-today",
+        "https://coingape.com/web-stories/top-7-trending-meme-coins-today",
+        "https://coingape.com/web-stories/pepe-coin-to-see-another-bullish-run-suggests-analyst",
+        "https://coingape.com/web-stories/what-is-brc-20",
+        "https://coingape.com/web-stories/justin-sun-announces-to-invest-in-meme-coins",
+        "https://coingape.com/web-stories/google-bard-launched-in-india-heres-how-you-can-access-it",
+        "https://coingape.com/web-stories/meme-coin-is-up-11750-after-elon-musks-tweet",
+        "https://coingape.com/web-stories/metaverse-expected-to-contribute-760-billion-to-us-economy-report",
+        "https://coingape.com/web-stories/elon-musk-denies-any-deal-with-tucker-carlson",
+        "https://coingape.com/web-stories/joe-biden-takes-a-dig-at-wealthy-crypto-investors",
+        "https://coingape.com/web-stories/elon-musk-reveals-these-new-features-for-twitter",
+        "https://coingape.com/web-stories/top-7-trending-coins-of-the-day",
+        "https://coingape.com/web-stories/a-look-at-solanas-1000-crypto-smartphone",
+        "https://coingape.com/web-stories/a-look-at-openai-ceo-backed-worldcoins-crypto-wallet",
+        "https://coingape.com/web-stories/elon-musk-suspects-a-wave-of-more-heavy-layoffs-coming",
+        "https://coingape.com/web-stories/ripple-ceo-reveals-200m-defense-cost-against-sec",
+        "https://coingape.com/web-stories/warren-buffets-answer-to-13-year-old-girls-question-goes-viral",
+        "https://coingape.com/web-stories/crypto-millionaires-the-top-gainers-of-pepe",
+        "https://coingape.com/web-stories/liechtenstein-set-to-enable-bitcoin-as-a-payment-method-for-government-services",
+        "https://coingape.com/web-stories/cathie-woods-ark-invest-piles-up-more-tesla-shares-copy",
+        "https://coingape.com/web-stories/man-buys-wrong-pepe-gets-rugged",
+        "https://coingape.com/web-stories/spotting-meme-coins-before-they-go-viral-tips-and-tricks",
+        "https://coingape.com/web-stories/mark-zuckerberg-elon-musk-snubbed-for-white-house-ai-summit",
+        "https://coingape.com/web-stories/dogecoin-creator-has-this-to-say-to-pepe-investors",
+        "https://coingape.com/web-stories/xrp-las-vegas-2023-big-names-light-up-the-event",
+        "https://coingape.com/web-stories/how-crypt-and-ai-are-changing-prediction-markets",
+        "https://coingape.com/web-stories/https-twitter-com-bgarlinghouse-status-1654686019848142848s20",
+        "https://coingape.com/web-stories/first-ever-ai-created-memecoin-skyrockets",
+        "https://coingape.com/web-stories/worlds-richest-man-bernard-arnault-reveals-nft-collection",
+        "https://coingape.com/web-stories/xrp-holders-dilemma-is-coinbase-friend-or-foe",
+        "https://coingape.com/web-stories/top-7-trending-coins-of-this-week",
+        "https://coingape.com/web-stories/binance-to-list-these-memecoins-next-dump-or-pump",
+        "https://coingape.com/web-stories/ai-blowing-snoop-doggs-mind",
+        "https://coingape.com/web-stories/jim-cramer-curse-strikes-again-western-alliance-shares-down-40",
+        "https://coingape.com/web-stories/leaked-document-reveals-google-losing-edge-in-ai",
+        "https://coingape.com/web-stories/how-much-you-need-to-invest-to-become-a-meme-coin-millionaire",
+        "https://coingape.com/web-stories/shib-burn-rate-up-by-39k-1-6b-tokens-burnt-in-24hrs",
+        "https://coingape.com/web-stories/pepe-crosses-800m-market-cap-gemini-to-list-next",
+        "https://coingape.com/web-stories/ai-riskuk-authorities-investigate-ai-firms",
+        "https://coingape.com/web-stories/joe-biden-meets-top-ai-leaders-elon-musk-reacts",
+        "https://coingape.com/web-stories/what-does-shiba-inu-need-to-reach-0-01",
+        "https://coingape.com/web-stories/in-may-the-cryptocurrency-market-is-set-to-experience-the-unlocking-of-ten-large-token-holdings",
+        "https://coingape.com/web-stories/this-is-why-pepe-is-poised-to-crash-soon",
+        "https://coingape.com/web-stories/chatgpts-has-crypto-like-hacking-risks-meta-ex-facebook",
+        "https://coingape.com/web-stories/us-gov-behind-on-bills-5-ways-it-will-impact-you",
+        "https://coingape.com/web-stories/what-is-de-dollarization-and-how-will-it-affect-crypto",
+        "https://coingape.com/web-stories/follow-these-top-07-on-chain-trends-to-stay-ahead",
+        "https://coingape.com/web-stories/top-cryptocurrency-hacks-so-far",
+        "https://coingape.com/web-stories/nobel-prize-winning-economist-criticizes-elon-musk",
+        "https://coingape.com/web-stories/100-pepe-investment-on-april-17-is-worth-this-much-now",
+        "https://coingape.com/web-stories/how-many-more-banks-will-fail-in-2023",
+        "https://coingape.com/web-stories/top-ai-tokens-to-watch-out-for-in-2023",
+        "https://coingape.com/web-stories/hollywood-writers-protest-against-the-rise-of-ai",
+        "https://coingape.com/web-stories/top-crypto-trends-of-2023",
+        "https://coingape.com/web-stories/carl-icahn-loses-10-billion-in-hours-after-hindenburg-report",
+        "https://coingape.com/web-stories/its-a-rerun-of-2008-charles-hoskinson",
+        "https://coingape.com/web-stories/tech-mogul-loses-1m-bet-on-bitcoin",
+        "https://coingape.com/web-stories/key-market-insights-for-investors-today",
+        "https://coingape.com/web-stories/hindenburg-research-reveals-latest-target",
+        "https://coingape.com/web-stories/shib-token-burn-rate-up-1600",
+        "https://coingape.com/web-stories/elon-musk-announces-changes-to-twitter-feed",
+        "https://coingape.com/web-stories/cathie-wood-doubles-down-on-coinbase",
+        "https://coingape.com/web-stories/godfather-of-ai-regrets-his-creation",
+        "https://coingape.com/web-stories/chatgpt-attacks-crypto-exchange-binance",
+        "https://coingape.com/web-stories/mark-cuban-predicts-chatgpts-future",
+        "https://coingape.com/web-stories/5-countries-driving-the-next-crypto-bull-run",
+        "https://coingape.com/web-stories/pepe-rises-to-top-100-crypto-tokens",
+        "https://coingape.com/web-stories/jpmorgan-shares-rise-after-winning-first-republic-auction",
+        "https://coingape.com/web-stories/andrew-tate-says-easy-money-is-no-longer-in-crypto",
+        "https://coingape.com/web-stories/robin-hood-hacker-steals-bitcoin-from-russian-intel-report",
+        "https://coingape.com/web-stories/jack-ma-takes-up-academic-role-in-japan",
+        "https://coingape.com/web-stories/pepe-listed-on-okx",
+        "https://coingape.com/web-stories/shib-token-burn-rate-up-1500",
+        "https://coingape.com/web-stories/trending-coins-of-the-week",
+        "https://coingape.com/web-stories/elon-musk-warns-further-rate-hikes-will-trigger-severe-recession",
+        "https://coingape.com/web-stories/hundreds-of-companies-interested-in-integrating-shibarium",
+        "https://coingape.com/web-stories/xrp-price-prediction-could-it-surge-30000",
+        "https://coingape.com/web-stories/openai-closes-300-million-funding-round-at-27-billion-29-billion-valuation",
+        "https://coingape.com/web-stories/elon-musk-talks-acquiring-twitter-with-bill-maher",
+        "https://coingape.com/web-stories/rich-dad-poor-dad-author-warns-against-cbdc-recommends-bitcoin",
+        "https://coingape.com/web-stories/kevin-oleary-on-de-dollarization-and-chinese-yuan",
+        "https://coingape.com/web-stories/jack-dorsey-elon-musk-should-have-walked-away-from-twitter-deal",
+        "https://coingape.com/web-stories/jim-cramer-inadvertently-predicts-first-republic-collapse",
+        "https://coingape.com/web-stories/shiba-inu-to-launch-customized-shib-cold-wallet",
+        "https://coingape.com/web-stories/mark-zuckerbergs-net-worth-jumps-10-billion",
+        "https://coingape.com/web-stories/jpmorgan-debuts-ai-model-used-to-decipher-fed-speeches-for-potential-trading-signals",
+        "https://coingape.com/web-stories/shib-burn-rate-up-5000",
+        "https://coingape.com/web-stories/man-imprisoned-for-stealing-bitcoins-from-irs",
+        "https://coingape.com/web-stories/solanas-sol-token-surges-125-in-2023-outpacing-bitcoin",
+        "https://coingape.com/web-stories/shiba-inu-burn-rate-soars-2000-in-24-hours",
+        "https://coingape.com/web-stories/cryptocurrency-market-surges-as-bitcoin-and-ethereum-lead-the-way",
+        "https://coingape.com/web-stories/crypto-users-lose-million-in-scams-via-phishing-urls",
+        "https://coingape.com/web-stories/crypto-users-lost-4m-in-scams-via-phishing-urls",
+        "https://coingape.com/web-stories/samsung-announces-collaboration-with-crypto-com",
+        "https://coingape.com/web-stories/meta-reports-revenue-growth-zuckerberg-give-credits-to-reels",
+        "https://coingape.com/web-stories/binance-ceo-predicts-the-future-of-ai-in-crypto",
+        "https://coingape.com/web-stories/the-future-of-work-exploring-emerging-ai-jobs",
+        "https://coingape.com/web-stories/cathie-woods-ark-invest-piles-up-more-tesla-shares",
+        "https://coingape.com/web-stories/metas-metaverse-division-just-reported-3-6-billion-in-losses-copy",
+        "https://coingape.com/web-stories/crypto-x-ai-baby-doge-partners-with-chaingpt",
+        "https://coingape.com/web-stories/google-and-microsoft-fight-over-the-future-of-ai",
+        "https://coingape.com/web-stories/tiktok-may-soon-let-you-create-ai-stylized-avatars",
+        "https://coingape.com/web-stories/apple-removes-bitcoin-whitepaper-from-macos-ventura-beta",
+        "https://coingape.com/web-stories/web3-gaming-in-2023-popular-genres-and-top-games",
+        "https://coingape.com/web-stories/infamous-cryptoqueen-to-be-the-subject-new-drama-series",
+        "https://coingape.com/web-stories/mind-blowing-ai-announcements-that-you-cant-miss",
+        "https://coingape.com/web-stories/openai-unveils-latest-features-for-chatgpt",
+        "https://coingape.com/web-stories/elon-musk-predicts-agi-future-riskier-than-nuclear-weapons",
+        "https://coingape.com/web-stories/flokiceo-skyrockets-60-next-memecoin-to-explode",
+        "https://coingape.com/web-stories/solana-integrates-chatgpt",
+        "https://coingape.com/web-stories/russia-digital-currencies-to-be-unrestricted-in-cross-border-payments",
+        "https://coingape.com/web-stories/vitalik-buterin-talks-blockchain-and-mindfulness-with-sadhguru",
+        "https://coingape.com/web-stories/twitter-introduces-new-feature-to-label-tweets",
+        "https://coingape.com/web-stories/crypto-buzz-top-stories-of-the-day",
+        "https://coingape.com/web-stories/crypto-is-dead-in-america-says-veteran-bitcoin-investor",
+        "https://coingape.com/web-stories/cathie-wood-buys-more-coinbase-shares-after-sec-lawsuit",
+        "https://coingape.com/web-stories/floki-surpasses-babydoge-bone-up-33",
+        "https://coingape.com/web-stories/elon-musk-says-this-why-world-is-ditching-us-dollar",
+        "https://coingape.com/web-stories/babydoge-and-floki-compete-for-3rd-place",
+        "https://coingape.com/web-stories/crypto-ai-big-hope-or-hype",
+        "https://coingape.com/web-stories/standard-chartered-predicts-bitcoin-to-reach-100000",
+        "https://coingape.com/web-stories/elon-musk-reveals-his-earnings-from-twitter-subscriptions",
+        "https://coingape.com/web-stories/coinbase-vs-sec-lawsuit-over-crypto-regulations",
+        "https://coingape.com/web-stories/elon-musk-picks-battle-with-famous-troll-dril",
+        "https://coingape.com/web-stories/binance-unveiled-ai-powered-chatbot-sensei",
+        "https://coingape.com/web-stories/john-oliver-explores-crypto-collapse-in-latest-episode",
+        "https://coingape.com/web-stories/babydoge-vs-pepe-dog-coins-reign",
+        "https://coingape.com/web-stories/china-expands-use-of-digital-yuan-for-employee-salaries",
+        "https://coingape.com/web-stories/shiba-inu-burn-rate-soars-1076-in-24-hours",
+        "https://coingape.com/web-stories/ndonesia-looking-to-move-away-from-the-u-s-dollar",
+        "https://coingape.com/web-stories/kucoin-official-twitter-account-hacked",
+        "https://coingape.com/web-stories/the-battle-for-ai-regulation-how-countries-compare",
+        "https://coingape.com/web-stories/memecoin-based-on-gary-gensler-is-up-3000",
+        "https://coingape.com/web-stories/mark-cuban-criticizes-elon-musk-for-removing-checkmarks",
+        "https://coingape.com/web-stories/zimbabwe-announces-gold-backed-digital-currency",
+        "https://coingape.com/web-stories/rich-dad-poor-dad-author-says-he-will-keep-buying-the-dip",
+        "https://coingape.com/web-stories/googles-chatbot-bard-now-debugs-and-explains-code",
+        "https://coingape.com/web-stories/big-ai-launches-is-the-takeover-here",
+        "https://coingape.com/web-stories/teslas-stock-to-reach-2000-by-2027-ark-invest",
+        "https://coingape.com/web-stories/shib-whales-fail-to-rurn-the-tide-token-remains-in-red",
+        "https://coingape.com/web-stories/bayc-floor-price-drops-below-50-eth",
+        "https://coingape.com/web-stories/elon-musks-twitter-sparks-chaos",
+        "https://coingape.com/web-stories/gemini-expands-to-india",
+        "https://coingape.com/web-stories/jack-dorsey-unveils-twitter-rival-for-android-users",
+        "https://coingape.com/web-stories/bitcoin-to-100k-predicts-rich-dad-poor-dad-author",
+        "https://coingape.com/web-stories/elon-musk-is-paying-for-twitter-blue-of-these-public-figures-heres-why",
+        "https://coingape.com/web-stories/tesla-shares-down-nearly-8-in-premarket",
+        "https://coingape.com/web-stories/google-plans-to-use-ai-for-advertisements-report",
+        "https://coingape.com/web-stories/tornado-cash-founder-to-be-released-from-jail",
+        "https://coingape.com/web-stories/chatgpt-powered-snapchat-ai-goes-viral",
+        "https://coingape.com/web-stories/shib-burn-rate-jumped-up-to-3100-within-24-hours",
+        "https://coingape.com/web-stories/tesla-reveals-bitcoin-holdings-in-q1-earnings-report",
+        "https://coingape.com/web-stories/how-autogpt-is-revolutionizing-automation",
+        "https://coingape.com/web-stories/elon-musk-is-looking-to-sue-microsoft",
+        "https://coingape.com/web-stories/memecoins-pepe-and-wojak-take-ethereum-by-storm",
+        "https://coingape.com/web-stories/elon-musk-verifies-floki-inu-as-organization-on-twitter",
+        "https://coingape.com/web-stories/morgan-stanely-shares-fall-nearly-5-in-premarket",
+        "https://coingape.com/web-stories/250m-worth-top-crypto-liquidated-in-24hrs",
+        "https://coingape.com/web-stories/elon-musk-support-reddits-bold-move-against-ai-giants",
+        "https://coingape.com/web-stories/you-may-be-eligible-for-compensation-from-facebook-heres-why",
+        "https://coingape.com/web-stories/ftt-soars-amid-ftx-reboot-speculations",
+        "https://coingape.com/web-stories/pepe-the-frog-soars-500-amid-new-wave-of-memecoins",
+        "https://coingape.com/web-stories/elon-musk-praises-taylor-swift-for-not-accepting-100m-ftx-deal",
+        "https://coingape.com/web-stories/analysts-predict-bitcoin-to-reach-45k-next-month",
+        "https://coingape.com/web-stories/russia-prepares-draft-law-to-allow-crypto-for-international-trade",
+        "https://coingape.com/web-stories/trumps-series-2-nfts-sell-out-in-6-hours-making-4-6m-in-profit",
+        "https://coingape.com/web-stories/starbucks-set-to-release-its-latest-nft-collection",
+        "https://coingape.com/web-stories/inflation-interest-rates-and-uncertainty-what-to-watch-for",
+        "https://coingape.com/web-stories/whatsapp-signal-oppose-government-surveillance",
+        "https://coingape.com/web-stories/truthgpt-elon-musks-answer-to-biased-chatgpt",
+        "https://coingape.com/web-stories/rich-dad-poor-dad-author-reveals-his-big-bet-on-bitcoin",
+        "https://coingape.com/web-stories/bruce-lee-immortalized-via-nfts-on-blockchain",
+        "https://coingape.com/web-stories/ai-could-replace-millions-of-software-engineers-in-india-2",
+        "https://coingape.com/web-stories/babydoge-surges-as-kucoin-announces-listing",
+        "https://coingape.com/web-stories/gary-gensler-found-shilling-algorand-in-old-video",
+        "https://coingape.com/web-stories/chatgpt-proves-its-capabilities-in-finance",
+        "https://coingape.com/web-stories/elon-musk-hints-at-suing-openai",
+        "https://coingape.com/web-stories/society-isnt-ready-for-the-rapid-advancement-of-ai-google-ceo",
+        "https://coingape.com/web-stories/eu-looks-to-regulate-ai-like-chatgpt-soon-report",
+        "https://coingape.com/web-stories/pixelmon-nft-collections-floor-price-soars-77",
+        "https://coingape.com/web-stories/the-top-7-must-attend-crypto-events-of-2023",
+        "https://coingape.com/web-stories/dogecoin-inspired-memecoin-is-up-51",
+        "https://coingape.com/web-stories/will-gensler-be-removed-as-sec-chair",
+        "https://coingape.com/web-stories/vitalik-emerges-from-seclusion-for-edcon-2023",
+        "https://coingape.com/web-stories/justin-sun-owned-huobi-burnt",
+        "https://coingape.com/web-stories/over-1-5-trillion-shib-burnt",
+        "https://coingape.com/web-stories/top-trending-coins-of-the-week",
+        "https://coingape.com/web-stories/babydoge-rockets-up-20-on-listing",
+        "https://coingape.com/web-stories/shapella-upgrade-is-causing-liquid-staking-tokens-to-skyrocket-details",
+        "https://coingape.com/web-stories/why-ada-price-may-spike-soon",
+        "https://coingape.com/web-stories/twitters-creator-subscription-program-what-is-it",
+        "https://coingape.com/web-stories/shib-burn-rate-skyrockets-over-45000-in-24-hours",
+        "https://coingape.com/web-stories/openai-ceo-addresses-gpt-5-rumors",
+        "https://coingape.com/web-stories/san-francisco-da-slams-elon-musks-reckless-tweet",
+        "https://coingape.com/web-stories/vitalik-buterin-uses-chatgpt-to-solve-this-problem",
+        "https://coingape.com/web-stories/elon-musks-tweet-sends-apt-soaring-15-8",
+        "https://coingape.com/web-stories/why-binance-coin-bnb-price-may-shoot-next-after-eth",
+        "https://coingape.com/web-stories/elon-musk-talks-further-about-twitter-monetization-details",
+        "https://coingape.com/web-stories/dogecoin-is-up-nearly-10-since-musks-1-million-bet",
+        "https://coingape.com/web-stories/update-on-shanghai-upgrade-1-01-million-eths-waiting-to-be-withdrawn",
+        "https://coingape.com/web-stories/xrp-lawyer-thanks-sec-chair-for-protecting-him",
+        "https://coingape.com/web-stories/amazon-announces-generative-ai-plans",
+        "https://coingape.com/web-stories/shib-burn-rate-jumps-nearly-500",
+        "https://coingape.com/web-stories/streaming-services-under-scanner",
+        "https://coingape.com/web-stories/mike-novogratz-predicts-bitcoin-to-hit-40000",
+        "https://coingape.com/web-stories/man-sentenced-to-prison-for-stealing-3-4-billion-in-bitcoin",
+        "https://coingape.com/web-stories/elon-musk-introduces-stocks-crypto-trading-on-twitter",
+        "https://coingape.com/web-stories/microstrategys-bitcoin-holdings-could-be-worth-trillions",
+        "https://coingape.com/web-stories/top-crypto-memecoins-to-buy-in-2023",
+        "https://coingape.com/web-stories/shaquille-oneal-served-in-ftx-lawsuit-who-will-be-next",
+        "https://coingape.com/web-stories/battle-of-the-bots-chatgpt-and-autogpt-face-off",
+        "https://coingape.com/web-stories/elon-musks-bbc-interview-spikes-memecoin-by-150",
+        "https://coingape.com/web-stories/billionaire-diller-urges-media-to-sue-ai-makers",
+        "https://coingape.com/web-stories/elon-musk-responds-to-twitters-bbc-takedown",
+        "https://coingape.com/web-stories/elon-musks-ai-tweet-dreams-challenge-critics",
+        "https://coingape.com/web-stories/is-cryptogpt-a-scam",
+        "https://coingape.com/web-stories/former-twitter-ceo-parag-agrawal-sues-elon-musk",
+        "https://coingape.com/web-stories/cz-predicts-influx-of-funds-as-hong-kong-banks-embrace-crypto",
+        "https://coingape.com/web-stories/how-jim-cramer-inadvertently-predicted-bitcoin-bull-market",
+        "https://coingape.com/web-stories/elon-musk-says-hes-no-longer-twitter-ceo",
+        "https://coingape.com/web-stories/xrp-lawyer-calls-out-sec-for-lying",
+        "https://coingape.com/web-stories/bitcoin-trades-around-30000-altcoins-see-red",
+        "https://coingape.com/web-stories/elon-musks-twitter-dives-into-ai",
+        "https://coingape.com/web-stories/chatgpt-like-ai-models-may-get-regulated-soon",
+        "https://coingape.com/web-stories/elon-musks-x-tweet-sparks-speculations",
+        "https://coingape.com/web-stories/montenegro-brings-ripple-on-board-to-launch-the-countrys-first-stablecoin",
+        "https://coingape.com/web-stories/china-is-looking-to-regulate-chatgpt-like-ai-services",
+        "https://coingape.com/web-stories/xrp-lawyer-is-sure-sbf-will-see-decades-of-prison-time",
+        "https://coingape.com/web-stories/bitcoin-breaches-30000-in-ten-months-whats-next-for-btc",
+        "https://coingape.com/web-stories/alibaba-unveils-its-generative-ai-tech-will-be-rolling-it-out-in-all-future-projects",
+        "https://coingape.com/web-stories/elon-musk-starts-following-indian-pm-narendra-modi",
+        "https://coingape.com/web-stories/why-nft-adoption-might-boom-in-2023",
+        "https://coingape.com/web-stories/china-payment-association-urges-2",
+        "https://coingape.com/web-stories/bbc-protests-elon-musks-gov-funded-media-label-on-twitter",
+        "https://coingape.com/web-stories/will-openai-be-the-next-trillion-dollar-company",
+        "https://coingape.com/web-stories/elon-musk-calls-for-ubi-after-ai-revolution",
+        "https://coingape.com/web-stories/elon-musk-rolls-out-new-features-for-twitter-blue-subscribers-copy",
+        "https://coingape.com/web-stories/ftx-creditors-recover-1-4b-in-digital-assets-have-identified-another-1-7b",
+        "https://coingape.com/web-stories/theories-emerge-steve-jobs-real-satoshi-nakamoto",
+        "https://coingape.com/web-stories/nfl-star-gets-his-ape-nft-stolen",
+        "https://coingape.com/web-stories/jp-morgan-bank-of-america-subpoenaed-for-bidens-records",
+        "https://coingape.com/web-stories/elon-musk-doesnt-think-ai-development-will-halt",
+        "https://coingape.com/web-stories/elon-musk-reveals-new-feature-to-reduce-impersonation-risk-on-twitter",
+        "https://coingape.com/web-stories/david-bowies-unheard-music-to-be-released-as-nft",
+        "https://coingape.com/web-stories/xrp-lawyer-says-government-should-seize-jpmorgans-assets-heres-why",
+        "https://coingape.com/web-stories/elon-musk-rolls-out-new-features-for-twitter-blue-subscribers",
+        "https://coingape.com/web-stories/ai-may-take-over-our-world-binance-ceo",
+        "https://coingape.com/web-stories/google-will-integrate-chat-ai-to-its-search-engine",
+        "https://coingape.com/web-stories/trump-warns-chinese-yuan-will-displace-us-dollar",
+        "https://coingape.com/web-stories/key-dates-to-watch-in-april",
+        "https://coingape.com/web-stories/worlds-top-25-billionaires-lost-200-billion-last-year",
+        "https://coingape.com/web-stories/polygon-labs-collaborates-with-the-fast-and-furious-team",
+        "https://coingape.com/web-stories/peter-schiffs-lauds-chatgpt-for-recommending-gold-over-bitcoin",
+        "https://coingape.com/web-stories/every-mcos-has-a-hidden-bitcoin-whitepaper-in-it",
+        "https://coingape.com/web-stories/google-unveils-the-fastest-supercomputer-for-ai",
+        "https://coingape.com/web-stories/what-is-chatgpt-dan-and-other-jailbreaks",
+        "https://coingape.com/web-stories/alibaba-to-launch-chatgpt-like-technology",
+        "https://coingape.com/web-stories/buggatti-and-asprey-unveil-first-ever-collection-on-bitcoin-blockchain",
+        "https://coingape.com/web-stories/us-president-joe-biden-addresses-ai",
+        "https://coingape.com/web-stories/germany-federal-office-fines-twitter-elon-musk-responds",
+        "https://coingape.com/web-stories/why-coinbase-should-keep-an-eye-on-this-sec-lawsuit",
+        "https://coingape.com/web-stories/cash-app-founder-bob-lee-found-dead",
+        "https://coingape.com/web-stories/shiba-inu-to-burn-111-trillion-shib-annually",
+        "https://coingape.com/web-stories/bill-gates-on-elon-musks-call-to-pause-ai-development",
+        "https://coingape.com/web-stories/is-twitter-new-algorithm-transphobic",
+        "https://coingape.com/web-stories/gucci-set-to-launch-kodapendents",
+        "https://coingape.com/web-stories/the-doge-eth-bridge-is-live-what-to-expect",
+        "https://coingape.com/web-stories/dogecoin-soars-after-elon-musk-changed-the-twitter-icon",
+        "https://coingape.com/web-stories/binance-ceo-alleges-another-exchange-behind-recent-fud",
+        "https://coingape.com/web-stories/papa-johns-launches-exclusive-nfts-with-onerare",
+        "https://coingape.com/web-stories/chatgpt-predicts-the-ufc-rematch-of-alex-pereira-vs-israel-adesanya",
+        "https://coingape.com/web-stories/nouriel-roubini-claims-hundreds-of-us-banks-are-insolvent",
+        "https://coingape.com/web-stories/crypto-community-slams-us-govt-for-selling-silk-road-bitcoins",
+        "https://coingape.com/web-stories/tug-of-war-elon-musk-and-the-new-york-times",
+        "https://coingape.com/web-stories/spacex-to-fly-62-bitcoin-to-the-moon",
+        "https://coingape.com/web-stories/lebron-james-wont-pay-elon-musk-for-blue-tick",
+        "https://coingape.com/web-stories/top-aspiring-crypto-coins-in-april",
+        "https://coingape.com/web-stories/google-bard-lags-behind-openais-chatgpt-pichai-confirms-upgrades",
+        "https://coingape.com/web-stories/jack-dorsey-supports-elon-musk-for-open-source-twitter-algorithm",
+        "https://coingape.com/web-stories/elon-musk-asks-court-to-end-258-bln-doge-lawsuit",
+        "https://coingape.com/web-stories/chatgpt-predicts-bitcoins-price-in-2030",
+        "https://coingape.com/web-stories/babydoge-outperforms-shib-and-doge-by-20-in-the-last-24-hours",
+        "https://coingape.com/web-stories/italian-privacy-regulator-bans-chatgpt",
+        "https://coingape.com/web-stories/south-korea-court-rejects-terra-co-founders-arrest-warrant",
+        "https://coingape.com/web-stories/elon-musk-confirms-open-sourcing-of-twitter-algorithm",
+        "https://coingape.com/web-stories/trump-indictment-raises-floor-price-of-trump-nfts",
+        "https://coingape.com/web-stories/new-organizations-refuse-to-pay-for-elon-musks-twitter-blue",
+        "https://coingape.com/web-stories/how-chatgpt-improves-investment-decision",
+        "https://coingape.com/web-stories/michael-burry-says-he-was-wrong-to-say-sell",
+        "https://coingape.com/web-stories/co-founder-yuzo-kano-comes-back-as-bitflyers-ceo",
+        "https://coingape.com/web-stories/ai-could-replace-millions-of-software-engineers-in-india",
+        "https://coingape.com/web-stories/binance-concealed-presence-in-china-for-years-financial-times-report-reveals",
+        "https://coingape.com/web-stories/will-binance-face-the-same-fate-as-us-banks",
+        "https://coingape.com/web-stories/ai-could-replace-300-million-jobs",
+        "https://coingape.com/web-stories/bitcoin-remains-bullish-amid-binance-lawsuit-eyes-30k",
+        "https://coingape.com/web-stories/elon-musk-surpasses-former-us-president",
+        "https://coingape.com/web-stories/robert-kiyosaki-sees-end-of-capitalism-amid-inflation",
+        "https://coingape.com/web-stories/who-is-funding-sbfs-pricey-defense",
+        "https://coingape.com/web-stories/cftc-lawsuit-triggers-627m-eth-withdrawals-on-binance",
+        "https://coingape.com/web-stories/elon-musk-and-ai-experts-seek-to-pause-ai-development",
+        "https://coingape.com/web-stories/why-openai-ceo-is-scared-of-ai",
+        "https://coingape.com/web-stories/disney-ends-its-metaverse-division",
+        "https://coingape.com/web-stories/elon-musk-takes-dig-at-bill-gates",
+        "https://coingape.com/web-stories/elon-musk-announces-twitter-overhaul",
+        "https://coingape.com/web-stories/key-market-events-to-keep-an-eye-on-this-week",
+        "https://coingape.com/web-stories/coinbase-announces-inflation-proof-flatcoins-amid-sec-notice",
+        "https://coingape.com/web-stories/ai-or-blockchain-mark-cuban-predicts-which-one-will-be-more-impactful",
+        "https://coingape.com/web-stories/elon-musks-twitter-takes-legal-action-over-source-code-leak",
+        "https://coingape.com/web-stories/gucci-strong-on-web3-adoption-with-yuga-labs",
+        "https://coingape.com/web-stories/elon-musk-critical-of-ai-bots-defends-paid-social-media",
+        "https://coingape.com/web-stories/why-elon-musk-is-worried-about-ai",
+        "https://coingape.com/web-stories/bruce-lee-immortalized-on-blockchain-via-nft",
+        "https://coingape.com/web-stories/rich-dad-poor-dad-author-predicts-next-crash-after-rate-hike",
+        "https://coingape.com/web-stories/do-kwon-charged-with-forgery-in-montenegro",
+        "https://coingape.com/web-stories/big-short-michael-blurry-critical-on-jerome-powell",
+        "https://coingape.com/web-stories/openai-admits-chatgpt-users-data-was-exposed",
+        "https://coingape.com/web-stories/elon-musk-reportedly-tried-to-take-over-openai",
+        "https://coingape.com/web-stories/binance-ceo-mocks-peter-schiff-over-bitcoin-tweet",
+        "https://coingape.com/web-stories/cathie-woods-loads-up-on-block-dumps-tesla",
+        "https://coingape.com/web-stories/jack-dorseys-wealth-down-526m-post-hindenburgs-report",
+        "https://coingape.com/web-stories/do-kwon-arrest-interpol-confirms-terra-founders-identity",
+        "https://coingape.com/web-stories/ack-dorseys-block-facilitating-massive-frauds-hindenberg-research",
+        "https://coingape.com/web-stories/oppenheimer-downgrades-coinbase-after-wells-notice",
+        "https://coingape.com/web-stories/elon-musk-trolls-u-s-president",
+        "https://coingape.com/web-stories/elon-musk-requests-doge-payments-to-visit-twitter-hq",
+        "https://coingape.com/web-stories/elon-musks-take-on-fed-rate-hike",
+        "https://coingape.com/web-stories/justin-sun-responds-to-sec-lawsuit",
+        "https://coingape.com/web-stories/sec-simply-has-not-been-fair-coinbase-ceo-responds-to-wells-notice",
+        "https://coingape.com/web-stories/fed-increases-rates-by-25-bps-crypto-markets-remains-bullish",
+        "https://coingape.com/web-stories/tesla-grooves-to-oscar-winning-naatu-naatu-elon-musk-reacts",
+        "https://coingape.com/web-stories/bill-gates-calls-chatgpt-most-revolutionary-tech-in-decades",
+        "https://coingape.com/web-stories/chinese-yuan-challenges-us-dollars-dominance",
+        "https://coingape.com/web-stories/twitter-analysts-predict-arbitrums-arb-price",
+        "https://coingape.com/web-stories/crypto-influencer-bitboythreatens-to-countersue-ftx-lawsuit-copy",
+        "https://coingape.com/web-stories/chatgpt-in-conversation-with-google-brad-discusses-future-of-work",
+        "https://coingape.com/web-stories/signature-bank-proves-house-of-cards-is-real-twitter-reacts",
+        "https://coingape.com/web-stories/bitcoin-bulls-eyeing-at-30000-why",
+        "https://coingape.com/web-stories/mysterious-shiba-inu-whale-moves-25-trillion-shib-to-cold-storage",
+        "https://coingape.com/web-stories/elon-musks-peak-insight-for-federal-reserve",
+        "https://coingape.com/web-stories/top-05-crypto-airdrops-to-look-out-for-in-2023",
+        "https://coingape.com/web-stories/chatgpt-not-the-security-threat-chess-legend-kasparov-explains-who",
+        "https://coingape.com/web-stories/breaking-bad-for-banks-swiss-bank-reports-some-giant-loss",
+        "https://coingape.com/web-stories/top-crypto-token-price-for-today-march-20",
+        "https://coingape.com/web-stories/cz-doesnt-care-about-the-money-crypto-twitter-goes-savage",
+        "https://coingape.com/web-stories/elon-musk-makes-fun-of-cryptelon-musks-advice-to-stop-bank-runso-cynics-after-svb-collapse-copy",
+         
+        ];
+
+    function changelink() {
+        // Get a random website from the list
+        var randomWebsite = websites[Math.floor(Math.random() * websites.length)];
+
+        // Set the data attribute of the object element to the random website
+        document.getElementById("external-content").setAttribute("data", randomWebsite);
+    }
+
+    // This is to set a random website when the page initially loads.
+    window.onload = changelink;
+</script>
+
+<object id="external-content" type="text/html">
+    External content not loaded.
+</object>
+
+
+<button onclick="changelink()" class="iframe-button">
+    <img  src="img/tape.png" alt="Right Icon" >
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+               </div>
+            </div>
+
+
+            <div class="view view-init tab" id="tab-5">
+               <div class="page">
+               
+
+
+
+<!--                   <div class="navbar navbar-large">
+                     <div class="navbar-bg"></div>
+                     <div class="navbar-inner">
+                        <div class="left">
+                           <a href="settings" class="link icon-only navbar-profile">
+                           <img src="img/avatars/small-avatar.jpg" alt="">
+                           </a>
+                        </div>
+                        
+                     
+                        <div class="right">
+                           <a href="#" class="link icon-only switch-theme theme-switcher">
+                           <i class="icon f7-icons">moon_stars</i>
+                         
+                         <a href="#tab-5" class="tab-link" >
+<i class="icon f7-icons tooltip-init" data-tooltip="Setting">gear_alt</i>
+                           </a>
+
+                        </div>
+                     </div>
+                  </div> -->
+                 
+
+                  <div class="page-content">
+   
+
+
+<div class="settings-header">
+    <div class="settings-image">
+        <img id="user-avatar" src="img/avatars/1.jpg" alt="" class="">
+        <a href="#" id="edit-profile-link" class="link edit-profile-image">
+            <i id="edit-icon" class="icon f7-icons">pencil</i>
+        </a>
+        <input type="file" id="avatar-upload" style="display: none;">
+    </div>
+    <div id="user-name" class="settings-name">Noah Campbell</div>
+    <div id="user-email" class="settings-email">ncampbell@envato.com</div>
+</div>
+
+<script>
+// Update avatar in all navbar-profile links
+function handleProfileImages(avatar) {
+    // Select all navbar-profile links
+    let profileImages = document.querySelectorAll('.navbar-profile');
+
+    profileImages.forEach(profileImage => {
+        // Set image source based on login status
+        let imgElement = profileImage.querySelector('img');
+        imgElement.src = avatar || 'img/avatars/small-avatar.jpg';
+        
+        // Add click event
+        profileImage.addEventListener('click', (e) => {
+            if (!user) {
+                // Prevent default link action
+                e.preventDefault();
+                // Redirect to login.html
+                window.location.href = 'login.html';
+            }
+        });
+    });
+}
+
+window.onload = function() {
+    // Fetch user data from Firestore
+    let username = localStorage.getItem('username');
+    if (username) {
+        db.collection('users').doc(username).get()
+        .then((doc) => {
+            if (doc.exists) {
+                // Update user data in localStorage
+                localStorage.setItem('user', JSON.stringify(doc.data()));
+            }
+        })
+        .catch((error) => {
+            console.error("Error getting document:", error);
+        });
+    }
+
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    if (user) {
+        // User is logged in, show user info
+        document.getElementById('user-avatar').src = user.avatar || "img/avatars/1.jpg";
+        document.getElementById('user-name').textContent = user.username || "Noah Campbell";
+        document.getElementById('user-email').textContent = user.email || "ncampbell@envato.com";
+
+        document.getElementById('edit-icon').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('avatar-upload').click();
+        });
+
+        document.getElementById('avatar-upload').addEventListener('change', function(e) {
+            let file = e.target.files[0];
+            let storageRef = firebase.storage().ref('avatars/' + file.name);
+
+            let uploadTask = storageRef.put(file);
+
+            uploadTask.on('state_changed', 
+            (snapshot) => { 
+                // track the upload progress
+            }, (error) => {
+                // handle upload errors
+                console.error('Upload failed:', error);
+            }, () => {
+                // get the download URL and update user's avatar in Firestore
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    user.avatar = downloadURL;
+                    localStorage.setItem('user', JSON.stringify(user));
+                    document.getElementById('user-avatar').src = downloadURL;
+
+                    // Also update the avatar in Firestore user document
+                    db.collection('users').doc(user.username).set({
+                        avatar: downloadURL
+                    }, { merge: true });
+
+                    // Update the profile images
+                    handleProfileImages(downloadURL);
+                });
+            });
+        });
+    } else {
+        // User is not logged in, show default image and login button
+        document.getElementById('user-avatar').src = "img/avatars/1.jpg";
+        document.getElementById('user-name').textContent = "Guest";
+        document.getElementById('user-email').textContent = "";
+
+        let loginLink = document.createElement('a');
+        loginLink.href = "login.html";
+        loginLink.textContent = "Log In";
+        loginLink.className = "link edit-profile-image";
+        
+        document.querySelector('.settings-header').appendChild(loginLink);
+    }
+
+    // Handle the profile images
+    handleProfileImages(user ? user.avatar : null);
+}
+
+</script>
+
+
+
+
+
+
+
+    <div class="list links-list colored-icons-list settings-list list-outline list-dividers full-width">
+      <ul>
+
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="colored-icon red">
+              <i class="icon f7-icons">bell_fill</i>
+            </div>
+            <div class="item-title">Notifications</div>
+            <div class="item-after">
+              <label class="toggle toggle-init color-green">
+                <input type="checkbox" checked="">
+                <span class="toggle-icon"></span>
+              </label>
+            </div>
+          </div>
+        </li>
+       
+
+        <li class="item-content">
+          <div class="item-inner">
+            <div class="colored-icon pink">
+              <i class="icon f7-icons">speaker_2_fill</i>
+            </div>
+            <div class="item-title">Sounds</div>
+            <div class="item-after">
+              <label class="toggle toggle-init color-green">
+                <input type="checkbox" checked="">
+                <span class="toggle-icon"></span>
+              </label>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#" onclick="showIframe('privacy.html')" >
+            <div class="colored-icon blue">
+              <i class="icon f7-icons">shield_lefthalf_fill</i>
+            </div>
+            Privacy &amp; Security
+          </a>
+        </li>
+  
+        <li>
+          <a href="#" class="">
+            <div class="colored-icon gray">
+              <i class="icon f7-icons">gear</i>
+            </div>
+            Version
+            <div class="item-after">v2.3.7</div>
+          </a>
+        </li>
+      
+
+
+        <li>
+          <a href="#" onclick="showIframe('terms.html')" >
+            <div class="colored-icon green">
+              <i class="icon f7-icons">doc_text_fill</i>
+            </div>
+            Terms Of Service
+          </a>
+        </li>
+
+     
+<style>
+    #iframeContainer button {
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 10001;  /* Increase the z-index */
+    }
+</style>
+
+<!-- Help Center link -->
+<li>
+    <a href="#" onclick="showIframe('support.html')" class="external">
+        <div class="colored-icon pink">
+            <i class="icon f7-icons">question_square_fill</i>
+        </div>
+        Help Center
+    </a>
+</li>
+
+<!-- Contact Us link -->
+<li>
+    <a href="#" onclick="showIframe('contact.html')" class="external">
+        <div class="colored-icon pink">
+            <i class="icon f7-icons">envelope_fill</i>
+        </div>
+        Contact Us
+    </a>
+</li>
+
+<!-- Iframe container -->
+<div id="iframeContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;">
+    <iframe id="contentIframe" style="width: 100%; height: 100%; border: none;"></iframe>
+    <button onclick="closeIframe()" style="position: absolute; top: 10px; right: 10px; z-index: 10001;">X</button>
+</div>
+
+<script>
+    function showIframe(url) {
+        document.getElementById('contentIframe').src = url;
+        document.getElementById('iframeContainer').style.display = 'block';
+    }
+
+    function closeIframe() {
+        document.getElementById('iframeContainer').style.display = 'none';
+    }
+</script>
+
+
+        <li>
+          <a href="#">
+            <div class="colored-icon purple">
+              <i class="icon f7-icons">star_fill</i>
+            </div>
+            Rate The App
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+               </div>
+            </div>
+
+
+
+            <div class="toolbar tabbar tabbar-icons toolbar-bottom">
+               <div class="toolbar-inner">
+                  <a href="#tab-1" class="tab-link">
+                  <i class="icon f7-icons">sparkles</i>
+                  <span class="tabbar-label">Market</span>
+                  </a>
+                  <a href="#tab-2" class="tab-link tab-link-active">
+                  <i class="icon f7-icons">rocket</i>
+                  <span class="tabbar-label">News</span>
+                  </a>
+                
+             <a href="#tab-3" id="chat-tab" class="tab-link">
+                 <i class="icon f7-icons tooltip-init" data-tooltip="chat_bubble">chat_bubble 
+                  <!-- <span id="unread-badge" class="badge bg-color-primary">77</span> -->
+               </i>
+                  <span class="tabbar-label">Chat</span>
+                  </a>
+
+                <a onclick="changelink()" href="#tab-4" class="tab-link">
+                  <i class="icon f7-icons">rectangle_on_rectangle_angled</i>
+                  <span class="tabbar-label">Stories</span>
+                  </a> 
+                  <a href="#tab-5" class="tab-link">
+                 <i class="icon f7-icons tooltip-init" data-tooltip="person_alt_circle">person_alt_circle</i>
+                  <span class="tabbar-label">Profile</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+<script>
+
+// On page load, get the current theme from local storage and apply it
+document.body.className = localStorage.getItem('theme') || 'color-blue';
+
+// Get all switchers
+let switchers = document.querySelectorAll('.theme-switcher');
+
+// Add the click event listener to all switchers
+switchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.className === 'color-blue') {
+            document.body.className = 'color-blue dark';
+            localStorage.setItem('theme', 'color-blue dark');
+        } else {
+            document.body.className = 'color-blue';
+            localStorage.setItem('theme', 'color-blue');
+        }
+
+        // Refresh the page
+        location.reload();
+    });
+});
+
+
+</script>
+
+
+
+
+      <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/framework7-bundle.min.js"></script>
+
+      <script src="js/app.js"></script>
+   </body>
+</html>

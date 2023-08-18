@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Random News</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+</head>
+<body>
+    <h1>Add Random News</h1>
+    <button id="add-news-button">Generate and Add News</button>
+    <div id="news-container"></div>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+            authDomain: "m-bdswiss.firebaseapp.com",
+            databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+            projectId: "m-bdswiss",
+            storageBucket: "m-bdswiss.appspot.com",
+            messagingSenderId: "333486800922",
+            appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+            measurementId: "G-M1LHL1975Q"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+        var button = document.querySelector('#add-news-button');
+
+        // Fetch categories and users once at startup
+        var categories = [];
+        var users = [];
+
+        db.collection('categories').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                categories.push(doc);
+            });
+        });
+
+        db.collection('users').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                users.push(doc);
+            });
+        });
+
+        button.addEventListener('click', () => {
+            categories.forEach((categoryDoc) => {
+                var title = faker.lorem.sentence();
+                // Select a random user
+                var userDoc = users[Math.floor(Math.random() * users.length)];
+                var userId = userDoc.id; // Use the document ID instead of the name
+                var content = faker.lorem.paragraph();
+                var date = new Date().toISOString();
+                var categoryID = categoryDoc.id;
+                var categoryName = categoryDoc.data().name;
+
+                var queryWords = ['news', 'updates', 'information', 'announcements', 'communications']; // Add more words as you like
+                var queryWord = queryWords[Math.floor(Math.random() * queryWords.length)];
+
+                fetch(`https://api.pexels.com/v1/search?query=${queryWord}`, {
+                    headers: {
+                        'Authorization': 'OgpE6kR9ZTu6lJhJVxSAQ9jyWtYp8WrkOiQX1xm1GACcxoS2Os6Nkv1T'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var imageUrl = data.photos[Math.floor(Math.random() * data.photos.length)].src.large;
+
+                    db.collection('news').add({
+                        title: title,
+                        userId: userId, // Store the userId instead of the authorId
+                        content: content,
+                        date: date,
+                        image: imageUrl,
+                        categoryID: categoryID,
+                        categoryName: categoryName,
+                    });
+                })
+                .catch(error => console.error(error));
+            });
+        });
+
+        function displayNews(categoryID = null) {
+            var newsContainer = document.querySelector('#news-container');
+            newsContainer.innerHTML = '';
+
+            var newsQuery = db.collection("news");
+
+            if (categoryID) {
+                newsQuery = newsQuery.where("categoryID", "==", categoryID);
+            }
+
+            newsQuery.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var newsEntry = document.createElement('div');
+
+                    var title = document.createElement('h2');
+                    title.textContent = doc.data().title;
+                    newsEntry.appendChild(title);
+
+                    var user = document.createElement('p');
+                    user.textContent = "By: " + doc.data().userId; // Display the user ID instead of author
+                    newsEntry.appendChild(user);
+
+                    var date = document.createElement('p');
+                    date.textContent = "Published on: " + new Date(doc.data().date).toLocaleDateString();
+                    newsEntry.appendChild(date);
+
+                    var image = document.createElement('img');
+                    image.src = doc.data().image;
+                    newsEntry.appendChild(image);
+
+                    var category = document.createElement('p');
+                    category.textContent = "Category: " + doc.data().categoryName;
+                    newsEntry.appendChild(category);
+
+                    var content = document.createElement('p');
+                    content.textContent = doc.data().content;
+                    newsEntry.appendChild(content);
+
+                    newsContainer.appendChild(newsEntry);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

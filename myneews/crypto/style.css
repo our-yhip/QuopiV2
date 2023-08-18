@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.025rem;
+  height: 100vh;
+  position: relative;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: darkgray;
+}
+.container {
+  height: calc(100vh - 4.5rem);
+  overflow-y: hidden;
+}
+.search-box,
+.filters .filter:not(.filter.active),
+.notification,
+.item .left img {
+  border: 1px solid rgba(209, 213, 219, 1);
+}
+.filters .filter.active {
+  color: rgb(37, 99, 235);
+  background-color: rgb(219, 234, 254);
+  border: none;
+}
+
+.item .crypto-increase i {
+  font-size: 0.3rem;
+}
+
+.item .crypto-increase i.positive-inc {
+  color: #28af7e;
+}
+
+.negative-inc {
+  color: #ef4444;
+  transform: rotate(180deg);
+}
+.notification {
+  position: relative;
+}
+.notification::before {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  right: 0.4rem;
+  top: 0.5rem;
+  background-color: red;
+}
+.navbar {
+  box-shadow: -3px -9px 15px -3px #ebebeb;
+}

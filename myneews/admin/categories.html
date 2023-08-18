@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories</title>
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Firebase and SweetAlert2 Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .category-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-item img {
+            margin-left: 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .action-buttons i {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<style>
+    #menu {
+    background: #528FCC;
+    color: #FFF;
+    height: 45px;
+    padding-left: 18px;
+    border-radius: 18px;
+}
+#menu ul, #menu li {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none
+}
+#menu ul {
+    width: 100%;
+}
+#menu li {
+    float: left;
+    display: inline;
+    position: relative;
+}
+#menu a {
+    display: block;
+    line-height: 45px;
+    padding: 0 14px;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 19px;
+    text-transform: capitalize;
+}
+#menu a.dropdown-arrow:after {
+    content: "\002B";
+    margin-left: 5px;
+}
+#menu li a:hover {
+    color: #0099CC;
+    background: #F2F2F2;
+}
+#menu input {
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 45px;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer
+}
+#menu label {
+    display: none;
+    line-height: 45px;
+    text-align: center;
+    position: absolute;
+    left: 35px
+}
+#menu label:before {
+    font-size: 1.6em;
+    content: "\2261"; 
+    margin-left: 20px;
+}
+#menu ul.sub-menus{
+    height: auto;
+    overflow: hidden;
+    width: 170px;
+    background: #444444;
+    position: absolute;
+    z-index: 99;
+    display: none;
+}
+#menu ul.sub-menus li {
+    display: block;
+    width: 100%;
+}
+#menu ul.sub-menus a {
+    color: #FFFFFF;
+    font-size: 16px;
+}
+#menu li:hover ul.sub-menus {
+    display: block
+}
+#menu ul.sub-menus a:hover{
+    background: #F2F2F2;
+    color: #444444;
+}
+@media screen and (max-width: 800px){
+    #menu {position:relative}
+    #menu ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
+    #menu ul.sub-menus {width:100%;position:static;}
+    #menu ul.sub-menus a {padding-left:30px;}
+    #menu li {display:block;float:none;width:auto;}
+    #menu input, #menu label {position:absolute;top:0;left:0;display:block}
+    #menu input {z-index:4}
+    #menu input:checked + label {color:white}
+    #menu input:checked + label:before {content:"\00d7"}
+    #menu input:checked ~ ul {display:block}
+}
+</style>
+
+<nav id='menu'>
+  <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+  <ul>
+    <li><a href='index.html'>home</a></li>
+    <li><a class='dropdown-arrow' href='#'>News</a>
+      <ul class='sub-menus'>
+        <li><a href='add-news.html'>Add News</a></li>
+        <li><a href='edit-news.html'>Edit News</a></li>
+      </ul>
+    </li>
+    <li><a href='categories.html'>Categories</a></li>
+  </ul>
+</nav>
+
+<script>
+    function updatemenu() {
+  if (document.getElementById('responsive-menu').checked == true) {
+    document.getElementById('menu').style.borderBottomRightRadius = '0';
+    document.getElementById('menu').style.borderBottomLeftRadius = '0';
+  }else{
+    document.getElementById('menu').style.borderRadius = '18px';
+  }
+}
+</script>
+
+    <h1 class="mb-4">Manage Categories</h1>
+
+    <section class="mb-5">
+        <h2>Add New Category</h2>
+        <div class="d-flex mt-3">
+            <input type="text" id="new-category-name" class="form-control mr-2" placeholder="Category Name">
+            <input type="text" id="new-category-image-url" class="form-control mr-2" placeholder="Image URL (optional)">
+            <input type="file" id="new-category-image-upload" class="form-control-file mr-2">
+            <button class="btn btn-primary" onclick="addCategory()">Add Category</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Edit Existing Categories</h2>
+        <div id="categories-container"></div>
+    </section>
+
+    <script>
+         const firebaseConfig = {
+            apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+            authDomain: "m-bdswiss.firebaseapp.com",
+            databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+            projectId: "m-bdswiss",
+            storageBucket: "m-bdswiss.appspot.com",
+            messagingSenderId: "333486800922",
+            appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+            measurementId: "G-M1LHL1975Q"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+        var storage = firebase.storage().ref();
+
+        function addCategory() {
+            const categoryName = document.getElementById('new-category-name').value;
+            const imageUrl = document.getElementById('new-category-image-url').value;
+            const imageFile = document.getElementById('new-category-image-upload').files[0];
+
+            if (categoryName.trim() === '') {
+                Swal.fire('Error', 'Please enter a category name.', 'error');
+                return;
+            }
+
+            if (imageFile) {
+                const imageRef = storage.child('category-images/' + imageFile.name);
+                imageRef.put(imageFile).then(snapshot => {
+                    return snapshot.ref.getDownloadURL();
+                }).then(uploadedImageUrl => {
+                    return db.collection('categories').add({
+                        name: categoryName,
+                        imageUrl: uploadedImageUrl
+                    });
+                }).then(() => {
+                    Swal.fire('Success', 'Category added successfully.', 'success');
+                    fetchCategories(); // Refresh the categories list
+                }).catch(error => {
+                    Swal.fire('Error', 'Error adding category.', 'error');
+                });
+            } else if (imageUrl.trim() !== '') {
+                db.collection('categories').add({
+                    name: categoryName,
+                    imageUrl: imageUrl
+                }).then(() => {
+                    Swal.fire('Success', 'Category added successfully.', 'success');
+                    fetchCategories(); // Refresh the categories list
+                }).catch(error => {
+                    Swal.fire('Error', 'Error adding category.', 'error');
+                });
+            } else {
+                db.collection('categories').add({
+                    name: categoryName
+                }).then(() => {
+                    Swal.fire('Success', 'Category added without image.', 'success');
+                    fetchCategories(); // Refresh the categories list
+                }).catch(error => {
+                    Swal.fire('Error', 'Error adding category.', 'error');
+                });
+            }
+        }
+
+        function editCategory(id, oldName, oldImageUrl) {
+            Swal.fire({
+                title: 'Edit Category',
+                html: `
+                    <input id="swal-input1" class="swal2-input" placeholder="Category Name" value="${oldName}">
+                    <input id="swal-input2" class="swal2-input" placeholder="Image URL (optional)" value="${oldImageUrl}">
+                    <input type="file" id="swal-input3" class="swal2-input">
+                `,
+                focusConfirm: false,
+                preConfirm: () => {
+                    return {
+                        newName: document.getElementById('swal-input1').value,
+                        newImageUrl: document.getElementById('swal-input2').value,
+                        newImageFile: document.getElementById('swal-input3').files[0]
+                    }
+                }
+            }).then((result) => {
+                if (result.value) {
+                    const { newName, newImageUrl, newImageFile } = result.value;
+
+                    if (newImageFile) {
+                        const imageRef = storage.child('category-images/' + newImageFile.name);
+                        imageRef.put(newImageFile).then(snapshot => {
+                            return snapshot.ref.getDownloadURL();
+                        }).then(uploadedImageUrl => {
+                            updateCategoryInFirestore(id, newName, uploadedImageUrl);
+                        });
+                    } else {
+                        updateCategoryInFirestore(id, newName, newImageUrl);
+                    }
+                }
+            });
+        }
+
+        function updateCategoryInFirestore(id, newName, newImageUrl) {
+            db.collection('categories').doc(id).update({
+                name: newName,
+                imageUrl: newImageUrl
+            }).then(() => {
+                Swal.fire('Success', 'Category updated successfully.', 'success');
+                fetchCategories(); // Refresh the categories list
+            }).catch(error => {
+                Swal.fire('Error', 'Error updating category.', 'error');
+            });
+        }
+
+        function fetchCategories() {
+            db.collection('categories').get().then((querySnapshot) => {
+                const categoriesContainer = document.getElementById('categories-container');
+                categoriesContainer.innerHTML = ''; // Clear existing categories
+
+                querySnapshot.forEach((doc) => {
+                    const categoryData = doc.data();
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category-item';
+
+                    const name = document.createElement('span');
+                    name.textContent = categoryData.name;
+                    categoryDiv.appendChild(name);
+
+                    if (categoryData.imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = categoryData.imageUrl;
+                        img.alt = categoryData.name;
+                        img.style.width = '50px';
+                        img.style.height = '50px';
+                        categoryDiv.appendChild(img);
+                    }
+
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Edit';
+                    editButton.addEventListener('click', function () {
+                        editCategory(doc.id, categoryData.name, categoryData.imageUrl || '');
+                    });
+                    categoryDiv.appendChild(editButton);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', function () {
+                        deleteCategory(doc.id, categoryData.name);
+                    });
+                    categoryDiv.appendChild(deleteButton);
+
+                    categoriesContainer.appendChild(categoryDiv);
+                });
+            });
+        }
+
+        function deleteCategory(id, categoryName) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: `Once deleted, you will not be able to recover the category: ${categoryName}`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    db.collection('categories').doc(id).delete().then(() => {
+                        Swal.fire('Success', `Category ${categoryName} has been deleted.`, 'success');
+                        fetchCategories(); // Refresh the categories list
+                    }).catch(error => {
+                        Swal.fire('Error', 'Error deleting category.', 'error');
+                    });
+                }
+            });
+        }
+
+        fetchCategories();
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

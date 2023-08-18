@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Random Books</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+</head>
+<body>
+    <h1>Add Random Books</h1>
+    <button id="add-book-button">Generate and Add Book</button>
+    <div id="book-container"></div>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+            authDomain: "m-bdswiss.firebaseapp.com",
+            databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+            projectId: "m-bdswiss",
+            storageBucket: "m-bdswiss.appspot.com",
+            messagingSenderId: "333486800922",
+            appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+            measurementId: "G-M1LHL1975Q"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+        var button = document.querySelector('#add-book-button');
+
+        button.addEventListener('click', () => {
+            var title = faker.lorem.sentence();
+            var author = faker.name.findName();
+            var description = faker.lorem.paragraph();
+            var downloads = faker.random.number({min:1, max:1000});
+            var pages = faker.random.number({min:20, max:500});
+            var publisher = faker.company.companyName();
+            var read_link = faker.internet.url();
+            var download_link = faker.internet.url();
+
+            fetch(`https://api.unsplash.com/photos/random?query=book&client_id=x4c5PbdSUi3XWbQW1NeKBrAN9fJW98Ozc6tYQ8cf9Ko`)
+                .then(response => response.json())
+                .then(data => {
+                    var imageUrl = data.urls.small;
+
+                    db.collection('books').add({
+                        title: title,
+                        author: author,
+                        cover: imageUrl,
+                        description: description,
+                        downloads: downloads,
+                        pages: pages,
+                        publisher: publisher,
+                        read_link: read_link,
+                        download_link: download_link,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                    .catch(error => console.error(error));
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>

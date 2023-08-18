@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsAPI Crypto News Updater</title>
+</head>
+<body>
+    <h1>NewsAPI Crypto News Updater</h1>
+    <p>Automatically fetching the latest crypto news from NewsAPI every minute.</p>
+    
+    <section id="newsSection">
+        <h2 id="postTitle"></h2>
+        <img id="postImage" src="" alt="NewsAPI post image" width="300"> <!-- Set width for visibility -->
+        <p id="postContent"></p>
+    </section>
+
+    <script>
+        const apiKey = 'cbbab57dfdfa4bb4b3a71ba2e4fb2a4d';  // Replace 'YOUR_API_KEY' with your actual API key
+        
+        async function fetchNewsFromNewsAPI() {
+            const endpoint = `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=crypto&apiKey=${apiKey}`;
+            const response = await fetch(endpoint);
+
+            if (!response.ok) {
+                throw new Error(`Error fetching news from NewsAPI: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            return data.articles;
+        }
+
+        async function updateNews() {
+            try {
+                const articles = await fetchNewsFromNewsAPI();
+                if (articles.length > 0) {
+                    const article = articles[0];  // getting the first article
+
+                    // Display the title, content, and image
+                    document.getElementById("postTitle").innerText = article.title;
+                    document.getElementById("postContent").innerText = article.description || "No content available";
+                    document.getElementById("postImage").src = article.urlToImage;
+                } else {
+                    console.log('No articles found.');
+                }
+            } catch (err) {
+                console.error("Error updating news:", err);
+            }
+        }
+
+        // Run every minute
+        setInterval(updateNews, 6000);  // Adjusted to run every minute (60000 milliseconds)
+        updateNews();  // Initial run when the page loads
+
+    </script>
+</body>
+</html>

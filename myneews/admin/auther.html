@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Random Authors</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+</head>
+<body>
+    <h1>Add Random Authors</h1>
+    <button id="add-author-button">Generate and Add Author</button>
+    <div id="author-container"></div>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+            authDomain: "m-bdswiss.firebaseapp.com",
+            databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+            projectId: "m-bdswiss",
+            storageBucket: "m-bdswiss.appspot.com",
+            messagingSenderId: "333486800922",
+            appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+            measurementId: "G-M1LHL1975Q"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+        var button = document.querySelector('#add-author-button');
+
+        button.addEventListener('click', () => {
+            for(let i=0; i<5; i++) {
+                var name = faker.name.findName();
+                var username = faker.internet.userName();
+                var bio = faker.lorem.paragraph();
+                var description = faker.lorem.paragraph(); // additional description
+                
+                fetch('https://api.pexels.com/v1/search?query=person', {
+                    headers: {
+                        'Authorization': 'Your_Authorization'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var imageUrl = data.photos[0].src.large;
+
+                    db.collection('authors').add({
+                        name: name,
+                        username: username,
+                        bio: bio,
+                        description: description, // added description field
+                        image: imageUrl
+                    });
+                })
+                .catch(error => console.error(error));
+            }
+        });
+    </script>
+</body>
+</html>

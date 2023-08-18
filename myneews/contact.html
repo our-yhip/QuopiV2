@@ -1,0 +1,134 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+    <style>
+      @keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+    </style>
+</head>
+  <body class="color-blue">
+
+
+
+
+
+<div class="navbar navbar-current">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner">
+      <div class="left">
+   <!--      <a href="#" class="link back external" onclick="goBack()">
+          <i class="icon f7-icons arrow-back">arrow_left</i>
+        </a> -->
+      </div>
+      <div class="title" style="left: -5px;">Contact Us</div>
+      <div class="right">
+       
+      </div>
+    </div>
+  </div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+    <!-- App root element -->
+  
+ 
+
+ <div class="page-content">
+    <img src="img/contact-us.png" alt="">
+    <h1>Contact Us</h1>
+    <div class="grid grid-cols-3 grid-gap">
+      <a href="#" class="link contact-block">
+        <i class="icon f7-icons arrow-back">phone_fill</i>
+        <div class="contact-method">Call</div>
+      </a>
+      <a href="#" class="link contact-block">
+        <i class="icon f7-icons arrow-back">ellipses_bubble_fill</i>
+        <div class="contact-method">Chat</div>
+      </a>
+      <a href="#" class="link contact-block">
+        <i class="icon f7-icons arrow-back">envelope_fill</i>
+        <div class="contact-method">Email</div>
+      </a>
+    </div>
+    <p>You can also send us a message, we usually reply to your messages within 48 hours.</p>
+    <form>
+      <div class="grid grid-cols-2 grid-gap no-margin">
+        <input type="text" id="name" name="name" placeholder="Your Name" class="">
+        <input type="email" id="email" name="email" placeholder="Your Email">
+      </div>
+      <textarea placeholder="Your message here" id="content" class="contact-input"></textarea>
+      <a href="#" class="button button-fill button-round color-dark">Send</a>
+    </form>
+  </div>
+
+
+   
+
+
+<script>
+
+// On page load, get the current theme from local storage and apply it
+document.body.className = localStorage.getItem('theme') || 'color-blue';
+
+// Get all switchers
+let switchers = document.querySelectorAll('.theme-switcher');
+
+// Add the click event listener to all switchers
+switchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.className === 'color-blue') {
+            document.body.className = 'color-blue dark';
+            localStorage.setItem('theme', 'color-blue dark');
+        } else {
+            document.body.className = 'color-blue';
+            localStorage.setItem('theme', 'color-blue');
+        }
+
+        // Refresh the page
+        location.reload();
+    });
+});
+
+
+</script>
+
+
+    <script src="js/framework7-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  
+
+</body></html>

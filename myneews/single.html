@@ -1,0 +1,403 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <!-- SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<style>
+   @keyframes placeHolderShimmer {
+  0% {
+    background-position: -800px 0
+  }
+  100% {
+    background-position: 800px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background-color: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 70px;
+  position: relative;
+}
+
+.background-masker {
+  background-color: #fff;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.btn-divide-left {
+  top: 0;
+  left: 25%;
+  height: 100%;
+  width: 5%;
+}
+
+</style>
+
+</head>
+ 
+
+<body class="color-blue">
+
+
+<div class="navbar navbar-current">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link back external" onclick="goBack()">
+          <i class="icon f7-icons arrow-back">arrow_left</i>
+        </a>
+      </div>
+    
+   
+
+       <div class="title" id="categoryTitle"></div>
+
+      <div class="right">
+        <a href="#" class="link">
+          <i class="icon f7-icons single-post-actions">ellipsis_circle_fill</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+
+
+
+<div class="page-content">
+    <div id="date" class="single-post-date">September 27, 2023</div>
+    <h1 id="title" class="single-post-title"></h1>
+    <img id="image" src="img/cards/1.jpg" alt="" class="single-cover-image">
+    <span id="categoryName" class="single-post-category"></span>
+    <div  id="content" class="single-post-content">
+        <p>
+           
+
+        </p>
+    </div>
+
+<script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+        authDomain: "m-bdswiss.firebaseapp.com",
+        databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+        projectId: "m-bdswiss",
+        storageBucket: "m-bdswiss.appspot.com",
+        messagingSenderId: "333486800922",
+        appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+        measurementId: "G-M1LHL1975Q"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+
+    // Extract the ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const newsId = urlParams.get('id');
+
+    // Fetch the news from Firestore using the ID
+// Fetch the news from Firestore using the ID
+// Fetch the news from Firestore using the ID
+db.collection("news").doc(newsId).get().then((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+
+        // Format the date
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = new Date(data.date).toLocaleDateString(undefined, options);
+
+        document.getElementById("date").innerText = formattedDate;
+        document.getElementById("title").innerText = data.title;
+        document.getElementById("image").src = data.image;
+        document.getElementById("categoryName").innerText = data.categoryName;
+        document.getElementById("content").innerHTML = `<p>${data.content}</p>`;
+
+ document.getElementById("categoryTitle").textContent = data.title;
+
+        console.log("Fetching user with username:", data.userId); // Debug log
+
+        // Fetch the user data using the userId (which is the username) from the news article
+        return db.collection("users").doc(data.userId).get();
+    } else {
+        console.log("No such document!");
+        return Promise.reject("No such document!");
+    }
+// ... (your existing code to fetch news data)
+
+}).then((userDoc) => {
+    if (userDoc.exists) {
+        const userData = userDoc.data();
+        document.getElementById("avatar").src = userData.avatar;
+        document.getElementById("username").innerText = userData.username;
+        document.getElementById("Occupation").innerText = userData.Occupation;
+
+        // Fetch comments after fetching the news data
+        fetchComments();
+    } else {
+        console.log("No such user with username:", userDoc.id); // Debug log
+    }
+}).catch((error) => {
+    console.log("Error:", error);
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+    <div class="single-post-author">
+      <img id="avatar" src="img/avatars/11.jpg" alt="">
+      <div class="author-details">
+        <div id="username" class="author-name">
+          Emily Wilson
+          <i class="icon f7-icons text-color-blue verified-badge">checkmark_seal_fill</i>
+        </div>
+        <div id="Occupation" class="author-description">Author &amp; Journalist</div>
+      </div>
+   
+    </div>
+
+
+
+<h2 class="title-bottom-line">
+    Comments
+    <span id="number-of-comments" class="badge color-dark comment-count">23</span>
+</h2>
+<div class="comment-list">
+    <div class="comment">
+        <img src="img/avatars/3.jpg" alt="">
+        <div class="comment-infos">
+            <div class="comment-header">
+                <div class="comment-header-left">
+                    <div id="name-of-who-comment" class="author-name">Noah Campbell</div>
+                    <div class="comment-date">• 12m</div>
+                </div>
+                <div class="comment-options">
+                    <a href="#" class="link"><i class="icon f7-icons">ellipsis_vertical</i></a>
+                </div>
+            </div>
+            <div id="comment-content" class="comment-text">Great article! You made some really good points and I appreciate the time and effort you put into it, thank you.</div>
+        </div>
+    </div>
+</div>
+<h2 class="title-bottom-line">Leave a Comment</h2>
+<form>
+    <div class="grid grid-cols-2 grid-gap no-margin">
+        <input id="commenter-name" type="text" name="name" placeholder="Your Name">
+        <input id="commenter-email" type="email" name="email" placeholder="Your Email">
+    </div>
+    <textarea id="typecomment" placeholder="Your comment here"></textarea>
+    <a id="send" href="#" class="button button-fill button-round color-dark">Send</a>
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    function formatDate(isoString) {
+    const date = new Date(isoString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return date.toLocaleDateString(undefined, options);
+}
+
+function fetchComments() {
+    db.collection("comments").where("newsId", "==", newsId).onSnapshot((snapshot) => {
+        const commentList = document.querySelector(".comment-list");
+        commentList.innerHTML = ''; // Clear existing comments
+
+        snapshot.forEach(doc => {
+            const commentData = doc.data();
+const commentElement = `
+    <div class="comment">
+        <img src="${commentData.avatar || 'path/to/default/avatar.jpg'}" alt="">
+        <div class="comment-infos">
+            <div class="comment-header">
+                <div class="comment-header-left">
+                    <div class="author-name">${commentData.name}</div>
+                    <div class="comment-date">• ${formatDate(commentData.date)}</div>
+                </div>
+                <div class="comment-options">
+                    <a href="#" class="link"><i class="icon f7-icons">ellipsis_vertical</i></a>
+                </div>
+            </div>
+            <div class="comment-text">${commentData.comment}</div>
+        </div>
+    </div>
+`;
+
+            commentList.innerHTML += commentElement;
+        });
+
+        // Update the number of comments
+        document.getElementById("number-of-comments").innerText = snapshot.size;
+    });
+}
+
+
+
+
+document.getElementById("send").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const nameInput = document.getElementById("commenter-name");
+    const emailInput = document.getElementById("commenter-email");
+    const commentTextarea = document.getElementById("typecomment");
+
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const commentText = commentTextarea.value;
+
+    // First, add the comment to the comments collection
+    db.collection("comments").add({
+        name: name,
+        email: email,
+        comment: commentText,
+        newsId: newsId,
+        date: new Date().toISOString(),
+        avatar: 'path/to/random/avatar.jpg'
+    }).then((docRef) => {
+        console.log("Comment added successfully with ID:", docRef.id);
+
+        // Clear the input fields
+        nameInput.value = '';
+        emailInput.value = '';
+        commentTextarea.value = '';
+
+        // Show success alert using SweetAlert
+
+
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+            title: 'Comment added!',
+            text: 'Your comment has been successfully added.',
+})
+
+    }).catch((error) => {
+        console.error("Error:", error);
+
+        // Show error alert using SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong! Please try again.',
+        });
+    });
+});
+
+
+</script>
+
+
+
+
+<script>
+
+// On page load, get the current theme from local storage and apply it
+document.body.className = localStorage.getItem('theme') || 'color-blue';
+
+// Get all switchers
+let switchers = document.querySelectorAll('.theme-switcher');
+
+// Add the click event listener to all switchers
+switchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.className === 'color-blue') {
+            document.body.className = 'color-blue dark';
+            localStorage.setItem('theme', 'color-blue dark');
+        } else {
+            document.body.className = 'color-blue';
+            localStorage.setItem('theme', 'color-blue');
+        }
+
+        // Refresh the page
+        location.reload();
+    });
+});
+
+console.log("News ID:", newsId);
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="js/framework7-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  
+
+</body>
+
+</html>

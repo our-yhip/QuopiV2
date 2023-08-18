@@ -1,0 +1,141 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+    <style>
+      @keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+    </style>
+</head>
+  <body class="color-blue">
+
+
+
+
+
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+    <!-- App root element -->
+  
+ 
+
+ <div class="page-content">
+  
+
+
+<h1>Privacy Policy for wxcvy</h1>
+
+<p>Last updated: [Date]</p>
+
+<p>At wxcvy, we respect your privacy and are committed to protecting it. This Privacy Policy explains our practices regarding the collection, use, and sharing of your personal information. By using our app, you consent to the data practices described in this policy.</p>
+
+<h2>Information We Collect</h2>
+
+<p>We may collect personal and non-personal information from you when you use our app. This can include:</p>
+<ul>
+    <li>Username</li>
+    <li>Email address</li>
+    <li>Device information</li>
+    <!-- Add other data points as necessary -->
+</ul>
+
+<h2>How We Use Your Information</h2>
+
+<p>We use the information we collect for various purposes, including:</p>
+<ul>
+    <li>To provide and maintain our app</li>
+    <li>To improve user experience</li>
+    <li>To communicate with you</li>
+    <!-- Add other use cases as necessary -->
+</ul>
+
+<h2>Sharing Your Information</h2>
+
+<p>We do not sell or rent your personal information to third parties. However, we may share your information with trusted third-party service providers as necessary for them to perform services on our behalf.</p>
+
+<h2>Security</h2>
+
+<p>We value your trust in providing us your personal information, and we strive to use commercially acceptable means to protect it. However, no method of transmission over the internet or method of electronic storage is 100% secure, so we cannot guarantee its absolute security.</p>
+
+<h2>Changes to This Privacy Policy</h2>
+
+<p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+<h2>Contact Us</h2>
+
+<p>If you have any questions or concerns about our Privacy Policy, please contact us at:</p>
+<p>Email: [Your Email Address]</p>
+<p>Address: [Your Address]</p>
+  </div>
+
+
+   
+
+
+<script>
+
+// On page load, get the current theme from local storage and apply it
+document.body.className = localStorage.getItem('theme') || 'color-blue';
+
+// Get all switchers
+let switchers = document.querySelectorAll('.theme-switcher');
+
+// Add the click event listener to all switchers
+switchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.className === 'color-blue') {
+            document.body.className = 'color-blue dark';
+            localStorage.setItem('theme', 'color-blue dark');
+        } else {
+            document.body.className = 'color-blue';
+            localStorage.setItem('theme', 'color-blue');
+        }
+
+        // Refresh the page
+        location.reload();
+    });
+});
+
+
+</script>
+
+
+    <script src="js/framework7-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  
+
+</body></html>

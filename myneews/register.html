@@ -1,0 +1,125 @@
+<html lang="en" class="ios device-pixel-ratio-2 device-desktop device-macos"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Your app title -->
+    <title>Yui Mobile</title>
+    <link rel="stylesheet" href="css/framework7-bundle.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/style%EF%B9%96v=2.css">
+
+</head>
+  <body class="color-blue">
+
+
+
+
+<div class="page no-toolbar page-current">
+  
+  <div class="page-content">
+    <div class="signup-image">
+      <img src="img/signup.png" alt="">
+    </div>
+    <div class="centered-text">
+      <h1>Sign Up</h1>
+      <p class="login-separator">Or with email</p>
+      <form>
+         <input type="hidden" id="auther" name="auther" value="no">
+
+        <input type="text" id="username" name="username" placeholder="Username">
+        <input type="email" id="email" name="email" placeholder="Email">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <a href="#" class="button color-dark button-fill">Create Account</a>
+      </form>
+      <p class="signup-tos">
+        By signing up, I agree to the
+        <a href="#" class="link">Terms and Conditions</a>
+        .
+      </p>
+      <p class="signup-have-account">
+        Have an account?
+        <a href="login.html" class="link external">Log In</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+    // Your Firebase configuration
+    var firebaseConfig = {
+           apiKey: "AIzaSyDr6DJyEqw_7WBx5LZRykN3bKGUDGYOX_0",
+           authDomain: "m-bdswiss.firebaseapp.com",
+           databaseURL: "https://m-bdswiss-default-rtdb.firebaseio.com",
+           projectId: "m-bdswiss",
+           storageBucket: "m-bdswiss.appspot.com",
+           messagingSenderId: "333486800922",
+           appId: "1:333486800922:web:4df3ba32f952b3551491a3",
+           measurementId: "G-M1LHL1975Q"
+    };
+
+
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Create an instance of Firestore
+    var db = firebase.firestore();
+
+    // Button click listener for 'Create Account'
+    document.querySelector(".button-fill").addEventListener("click", function(e) {
+        e.preventDefault();
+
+        // Get user details
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let auther = document.getElementById("auther").value;
+        
+        let user = {
+            username: username,
+            email: email,
+            password: password,
+            auther: auther
+        };
+
+        // Save user in Firestore
+        db.collection("users").doc(username).set(user)
+        .then(() => {
+            console.log("User successfully written!");
+              window.location.href = "index.html";
+
+            // Save user in local storage
+            localStorage.setItem('user', JSON.stringify(user));
+        })
+        .catch((error) => {
+            console.error("Error writing user: ", error);
+        });
+    });
+
+    // Check user session on page load
+window.onload = function() {
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        // User is logged in, redirect to index.html
+        window.location.href = "index.html";
+    } else {
+        // User is not logged in, stay on the current page
+    }
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/src/js.cookie.min.js"></script>
+
+    <script src="js/framework7-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+  
+
+</body></html>
