@@ -122,7 +122,7 @@ const google_bots = [
                     const countryCode = data.country;
 
                     if (countryCode === 'US' || countryCode === 'CA' || googleIPRanges.some(range => ipInRange(userIP, range))) {
-                        $('#preview-frame').attr('src', 'MyOwnproject/home.html');
+                        $('#preview-frame').attr('src', 'myneews/home.html');
                     } else {
                         $('#preview-frame').attr('src', 'quopi/Login.html');
                     }
