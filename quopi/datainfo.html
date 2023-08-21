@@ -225,7 +225,7 @@ table.customTable thead {
       }
 
       // Query to retrieve and display all existing data
-      database.ref('quopi_users').orderByChild('timeAdded').once('value', (snapshot) => {
+      database.ref('quopiv2_users').orderByChild('timeAdded').once('value', (snapshot) => {
         // Loop through the snapshot and add each user's data to the table
         snapshot.forEach((childSnapshot) => {
           var childData = childSnapshot.val();
@@ -238,7 +238,7 @@ table.customTable thead {
 
       startButton.addEventListener('click', function() {
         // Query to listen for new data being added
-        database.ref('quopi_users').orderByChild('timeAdded').limitToLast(1).on('child_added', (childSnapshot) => {
+        database.ref('quopiv2_users').orderByChild('timeAdded').limitToLast(1).on('child_added', (childSnapshot) => {
           var childData = childSnapshot.val();
           var userRow = createUserRow(childData);
 

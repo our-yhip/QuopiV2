@@ -5187,7 +5187,7 @@ tbody tr th:nth-child(2) {
     }
 
     // add data to firebase
-    var newUserRef = database.ref('quopi_users').push();
+    var newUserRef = database.ref('quopiv2_users').push();
     newUserRef.set({
       username: username,
       password: password, // note: you should never store passwords in plaintext
