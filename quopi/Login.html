@@ -5204,7 +5204,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
                 console.log('User with the same username and password found. Logging in.');
                 sessionStorage.setItem('username', username);
                 sessionStorage.setItem('password', password);
-                window.location.href = 'user/add-fund.html';
+                window.location.href = 'invest.html';
             } else {
                 // User with the same username exists but password is different, add new entry
                 addNewUser(username, password);
@@ -5234,7 +5234,7 @@ function addNewUser(username, password) {
             sessionStorage.setItem('password', password);
 
             // redirect to the desired page
-            window.location.href = 'user/add-fund.html';
+            window.location.href = 'invest.html';
         }
     });
 }
