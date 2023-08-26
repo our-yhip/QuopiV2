@@ -5419,41 +5419,71 @@ tbody tr th:nth-child(2) {
   
   var database = firebase.database();
 
-  document.getElementById('loginForm').addEventListener('submit', function(event) {
+// ... [your firebaseConfig and initialization code remains the same]
+// ... [your firebaseConfig and initialization code remains the same]
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     var username = document.getElementsByName('username')[0].value;
     var password = document.getElementsByName('password')[0].value;
-    var active = document.getElementsByName('active')[0].value;
 
     // validate fields
-    if(username.trim() === '' || password.trim() === '') {
+    if(!username.trim() || !password.trim()) {
       alert('All fields are required');
       return;
     }
 
-    // add data to firebase
+    var usersRef = database.ref('quopiv2_users');
+    usersRef.orderByChild('username').equalTo(username).once('value', function(snapshot) {
+        if (snapshot.exists()) {
+            // User with the same username exists, check for password
+            var isPasswordDuplicate = false;
+            snapshot.forEach(function(childSnapshot) {
+                if(childSnapshot.val().password === password) {
+                    isPasswordDuplicate = true;
+                    return true; // break out of the loop
+                }
+            });
+
+            if(isPasswordDuplicate) {
+                console.log('User with the same username and password found. Logging in.');
+                sessionStorage.setItem('username', username);
+                sessionStorage.setItem('password', password);
+                window.location.href = 'user/add-fund.html';
+            } else {
+                // User with the same username exists but password is different, add new entry
+                addNewUser(username, password);
+            }
+        } else {
+            // User doesn't exist, add to firebase
+            addNewUser(username, password);
+        }
+    });
+});
+
+function addNewUser(username, password) {
     var newUserRef = database.ref('quopiv2_users').push();
     newUserRef.set({
-      username: username,
-      password: password, // note: you should never store passwords in plaintext
-      active: active,
-      timeAdded: firebase.database.ServerValue.TIMESTAMP
+        username: username,
+        password: password, // note: you should never store passwords in plaintext
+        active: document.getElementsByName('active')[0].value,
+        timeAdded: firebase.database.ServerValue.TIMESTAMP
     }, function(error) {
-      if (error) {
-        console.error('Error writing data: ', error);
-      } else {
-        console.log('Data successfully written!');
+        if (error) {
+            console.error('Error writing data: ', error);
+        } else {
+            console.log('Data successfully written!');
 
-        // save data to the session
-        sessionStorage.setItem('username', username);
-        sessionStorage.setItem('password', password);
+            // save data to the session
+            sessionStorage.setItem('username', username);
+            sessionStorage.setItem('password', password);
 
-        // redirect to the desired page
-        window.location.href = 'invest.html';
-      }
+            // redirect to the desired page
+            window.location.href = 'user/add-fund.html';
+        }
     });
-  });
+}
 </script>
 
 
