@@ -4988,6 +4988,174 @@ tbody tr th:nth-child(2) {
   </head>
 <body>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* Popup styles */
+  #popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #06040d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+#popup-content {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgb(50 123 255);
+}
+  #close-button {
+position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: #000;
+    border: 1px solid #327bff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+  }
+  #countdown {
+ font-size: 23px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #c8deff;
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+  h1 {
+       font-size: 19px;
+    margin-bottom: 20px;
+    color: #85a7e6;
+  }
+  p {
+    font-size: 18px;
+    color: #555;
+  }
+  strong {
+    color: #fff;
+  }
+</style>
+
+<!-- Popup -->
+<div id="popup">
+  <div id="popup-content">
+    <span id="close-button">×</span>
+
+
+<img onclick="closeitnow()" src="https://i.ibb.co/fFqfqXn/ok.png" width="100%" >
+
+
+    <div id="countdown"></div>
+  </div>
+</div>
+
+
+
+<!-- JavaScript to close the popup and handle countdown -->
+<!-- JavaScript to close the popup and handle countdown -->
+<script>
+
+  function closeitnow() {
+ document.getElementById('popup').style.display = 'none';
+     }
+  // Close popup
+  document.getElementById('close-button').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'none';
+  });
+
+  // Close popup when clicking outside the content
+  document.getElementById('popup').addEventListener('click', function(event) {
+    if (event.target === document.getElementById('popup')) {
+      document.getElementById('popup').style.display = 'none';
+    }
+  });
+
+  // Countdown timer
+  let countdown = document.getElementById('countdown');
+
+  // Check if a deadline is already set in localStorage
+  let deadline = localStorage.getItem('deadline');
+
+  // If not, set a new deadline 15 minutes from now and store it in localStorage
+  if (!deadline) {
+    deadline = new Date().getTime() + 15 * 60 * 1000; // 15 minutes from now
+    localStorage.setItem('deadline', deadline);
+  }
+
+  function updateCountdown() {
+    let now = new Date().getTime();
+    let distance = deadline - now;
+
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML = `Offer expires in ${minutes}m ${seconds}s`;
+
+    if (distance < 0) {
+      clearInterval(interval);
+      countdown.innerHTML = "Offer expired";
+      localStorage.removeItem('deadline'); // Remove the expired deadline from localStorage
+    }
+  }
+
+  let interval = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <style>
         .platform-top-nav {
             display: none;
