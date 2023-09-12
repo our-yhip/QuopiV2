@@ -5083,7 +5083,7 @@ position: absolute;
     <span id="close-button">×</span>
 
 
-<img onclick="closeitnow()" src="https://i.ibb.co/fFqfqXn/ok.png" width="100%" >
+<img onclick="closeitnow()" src="https://i.ibb.co/p0gxJLt/nb.png" width="100%" >
 
 
     <div id="countdown"></div>
@@ -5096,51 +5096,78 @@ position: absolute;
 <!-- JavaScript to close the popup and handle countdown -->
 <script>
 
-  function closeitnow() {
- document.getElementById('popup').style.display = 'none';
-     }
-  // Close popup
-  document.getElementById('close-button').addEventListener('click', function() {
+function closeitnow() {
+  document.getElementById('popup').style.display = 'none';
+}
+
+// Close popup
+document.getElementById('close-button').addEventListener('click', function() {
+  document.getElementById('popup').style.display = 'none';
+  updateLastShownTime(); // Update the last shown time when the popup is closed
+});
+
+// Close popup when clicking outside the content
+document.getElementById('popup').addEventListener('click', function(event) {
+  if (event.target === document.getElementById('popup')) {
     document.getElementById('popup').style.display = 'none';
-  });
-
-  // Close popup when clicking outside the content
-  document.getElementById('popup').addEventListener('click', function(event) {
-    if (event.target === document.getElementById('popup')) {
-      document.getElementById('popup').style.display = 'none';
-    }
-  });
-
-  // Countdown timer
-  let countdown = document.getElementById('countdown');
-
-  // Check if a deadline is already set in localStorage
-  let deadline = localStorage.getItem('deadline');
-
-  // If not, set a new deadline 15 minutes from now and store it in localStorage
-  if (!deadline) {
-    deadline = new Date().getTime() + 15 * 60 * 1000; // 15 minutes from now
-    localStorage.setItem('deadline', deadline);
+    updateLastShownTime(); // Update the last shown time when the popup is closed
   }
+});
 
-  function updateCountdown() {
-    let now = new Date().getTime();
-    let distance = deadline - now;
+// Countdown timer
+let countdown = document.getElementById('countdown');
 
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+// Check if a deadline is already set in localStorage
+let deadline = localStorage.getItem('deadline');
 
-    countdown.innerHTML = `Offer expires in ${minutes}m ${seconds}s`;
+// If not, set a new deadline 15 minutes from now and store it in localStorage
+if (!deadline) {
+  deadline = new Date().getTime() + 15 * 60 * 1000; // 15 minutes from now
+  localStorage.setItem('deadline', deadline);
+}
 
-    if (distance < 0) {
-      clearInterval(interval);
-      countdown.innerHTML = "Offer expired";
-      localStorage.removeItem('deadline'); // Remove the expired deadline from localStorage
-    }
+function updateCountdown() {
+  let now = new Date().getTime();
+  let distance = deadline - now;
+
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdown.innerHTML = `Offer expires in ${minutes}m ${seconds}s`;
+
+  if (distance < 0) {
+    clearInterval(interval);
+    countdown.innerHTML = "Offer expired";
+    localStorage.removeItem('deadline'); // Remove the expired deadline from localStorage
   }
+}
 
-  let interval = setInterval(updateCountdown, 1000);
-  updateCountdown();
+let interval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Function to update the last shown time in localStorage
+function updateLastShownTime() {
+  localStorage.setItem('lastShown', new Date().getTime());
+}
+
+// Function to check if 24 hours have passed since the last time the popup was shown
+function shouldShowPopup() {
+  const lastShown = localStorage.getItem('lastShown');
+  if (!lastShown) {
+    return true;
+  }
+  const now = new Date().getTime();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
+  return now - lastShown >= twentyFourHours;
+}
+
+// Show the popup if 24 hours have passed since the last time it was shown
+if (shouldShowPopup()) {
+  document.getElementById('popup').style.display = 'block';
+  updateLastShownTime(); // Update the last shown time when the popup is shown
+}
+
+
 </script>
 
 
