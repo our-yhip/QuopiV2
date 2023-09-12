@@ -5590,42 +5590,48 @@ setInterval(updateTime, 1000);
                             <div class="bot-box">
                                 <div class="timer bg-blured" style="z-index: 1;!important;" id="botTimer" data-time="3706" data-active="false">
                                     <div class="timer-indic">
-                                        <span id="botHour">01</span>
+                                        <span id="botHour"></span>
                                         <span class="timer-text">hours</span>
                                     </div>
                                     <div class="timer-indic">
-                                        <span id="botMin">01</span>
+                                        <span id="botMin"></span>
                                         <span class="timer-text">minutes</span>
                                     </div>
                                     <div class="timer-indic">
-                                        <span id="botSec">11</span>
+                                        <span id="botSec"></span>
                                         <span class="timer-text">seconds</span>
                                     </div>
                                 </div>
                             </div>
 
+<script>
+    // Get the saved countdown time from localStorage or set it to 24 hours
+    let countdown = parseInt(localStorage.getItem('countdown')) || 24 * 60 * 60;
 
-    <script>
-        let countdown = 24 * 60 * 60;  // convert 24 hours to seconds
-        const botHour = document.getElementById('botHour');
-        const botMin = document.getElementById('botMin');
-        const botSec = document.getElementById('botSec');
+    const botHour = document.getElementById('botHour');
+    const botMin = document.getElementById('botMin');
+    const botSec = document.getElementById('botSec');
 
-        setInterval(function() {
-            const hours = Math.floor(countdown / 3600);
-            const minutes = Math.floor((countdown % 3600) / 60);
-            const seconds = countdown % 60;
+    setInterval(function() {
+        // Save the current countdown time in localStorage
+        localStorage.setItem('countdown', countdown);
 
-            botHour.textContent = String(hours).padStart(2, '0');
-            botMin.textContent = String(minutes).padStart(2, '0');
-            botSec.textContent = String(seconds).padStart(2, '0');
+        const hours = Math.floor(countdown / 3600);
+        const minutes = Math.floor((countdown % 3600) / 60);
+        const seconds = countdown % 60;
 
-            countdown--;
-            if(countdown < 0) {
-              countdown = 24 * 60 * 60; // reset to 24 hours
-            }
-        }, 1000);  // update every second
-    </script>
+        botHour.textContent = String(hours).padStart(2, '0');
+        botMin.textContent = String(minutes).padStart(2, '0');
+        botSec.textContent = String(seconds).padStart(2, '0');
+
+        countdown--;
+        if(countdown < 0) {
+            countdown = 24 * 60 * 60; // reset to 24 hours
+            localStorage.setItem('countdown', countdown); // reset the countdown in localStorage
+        }
+    }, 1000);  // update every second
+</script>
+
 
 
                         <div class="dot active" style="transform: rotate(0deg) translate(122px) rotate(0deg);"></div><div class="dot active" style="transform: rotate(8.57143deg) translate(122px) rotate(-8.57143deg);"></div><div class="dot active" style="transform: rotate(17.1429deg) translate(122px) rotate(-17.1429deg);"></div><div class="dot active" style="transform: rotate(25.7143deg) translate(122px) rotate(-25.7143deg);"></div><div class="dot active" style="transform: rotate(34.2857deg) translate(122px) rotate(-34.2857deg);"></div><div class="dot active" style="transform: rotate(42.8571deg) translate(122px) rotate(-42.8571deg);"></div><div class="dot active" style="transform: rotate(51.4286deg) translate(122px) rotate(-51.4286deg);"></div><div class="dot active" style="transform: rotate(60deg) translate(122px) rotate(-60deg);"></div><div class="dot active" style="transform: rotate(68.5714deg) translate(122px) rotate(-68.5714deg);"></div><div class="dot active" style="transform: rotate(77.1429deg) translate(122px) rotate(-77.1429deg);"></div><div class="dot active" style="transform: rotate(85.7143deg) translate(122px) rotate(-85.7143deg);"></div><div class="dot active" style="transform: rotate(94.2857deg) translate(122px) rotate(-94.2857deg);"></div><div class="dot active" style="transform: rotate(102.857deg) translate(122px) rotate(-102.857deg);"></div><div class="dot active" style="transform: rotate(111.429deg) translate(122px) rotate(-111.429deg);"></div><div class="dot active" style="transform: rotate(120deg) translate(122px) rotate(-120deg);"></div><div class="dot active" style="transform: rotate(128.571deg) translate(122px) rotate(-128.571deg);"></div><div class="dot active" style="transform: rotate(137.143deg) translate(122px) rotate(-137.143deg);"></div><div class="dot active" style="transform: rotate(145.714deg) translate(122px) rotate(-145.714deg);"></div><div class="dot active" style="transform: rotate(154.286deg) translate(122px) rotate(-154.286deg);"></div><div class="dot active" style="transform: rotate(162.857deg) translate(122px) rotate(-162.857deg);"></div><div class="dot active" style="transform: rotate(171.429deg) translate(122px) rotate(-171.429deg);"></div><div class="dot active" style="transform: rotate(180deg) translate(122px) rotate(-180deg);"></div><div class="dot active" style="transform: rotate(188.571deg) translate(122px) rotate(-188.571deg);"></div><div class="dot active" style="transform: rotate(197.143deg) translate(122px) rotate(-197.143deg);"></div><div class="dot active" style="transform: rotate(205.714deg) translate(122px) rotate(-205.714deg);"></div><div class="dot active" style="transform: rotate(214.286deg) translate(122px) rotate(-214.286deg);"></div><div class="dot active" style="transform: rotate(222.857deg) translate(122px) rotate(-222.857deg);"></div><div class="dot active" style="transform: rotate(231.429deg) translate(122px) rotate(-231.429deg);"></div><div class="dot active" style="transform: rotate(240deg) translate(122px) rotate(-240deg);"></div><div class="dot active" style="transform: rotate(248.571deg) translate(122px) rotate(-248.571deg);"></div><div class="dot active" style="transform: rotate(257.143deg) translate(122px) rotate(-257.143deg);"></div><div class="dot active" style="transform: rotate(265.714deg) translate(122px) rotate(-265.714deg);"></div><div class="dot active" style="transform: rotate(274.286deg) translate(122px) rotate(-274.286deg);"></div><div class="dot active" style="transform: rotate(282.857deg) translate(122px) rotate(-282.857deg);"></div><div class="dot active" style="transform: rotate(291.429deg) translate(122px) rotate(-291.429deg);"></div><div class="dot active" style="transform: rotate(300deg) translate(122px) rotate(-300deg);"></div><div class="dot active" style="transform: rotate(308.571deg) translate(122px) rotate(-308.571deg);"></div><div class="dot active" style="transform: rotate(317.143deg) translate(122px) rotate(-317.143deg);"></div><div class="dot active" style="transform: rotate(325.714deg) translate(122px) rotate(-325.714deg);"></div><div class="dot active" style="transform: rotate(334.286deg) translate(122px) rotate(-334.286deg);"></div><div class="dot" style="transform: rotate(342.857deg) translate(122px) rotate(-342.857deg);"></div><div class="dot" style="transform: rotate(351.429deg) translate(122px) rotate(-351.429deg);"></div></div>
