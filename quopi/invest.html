@@ -5019,7 +5019,7 @@ tbody tr th:nth-child(2) {
     width: 100%;
     height: 100%;
     background-color: #06040d;
-    display: flex;
+    display: none; /* Initially hidden */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -5081,11 +5081,7 @@ position: absolute;
 <div id="popup">
   <div id="popup-content">
     <span id="close-button">×</span>
-
-
-<img onclick="closeitnow()" src="https://i.ibb.co/p0gxJLt/nb.png" width="100%" >
-
-
+    <img onclick="closeitnow()" src="https://i.ibb.co/p0gxJLt/nb.png" width="100%" >
     <div id="countdown"></div>
   </div>
 </div>
@@ -5098,8 +5094,8 @@ position: absolute;
 
 function closeitnow() {
   document.getElementById('popup').style.display = 'none';
+  updateLastShownTime(); // Update the last shown time when the popup is closed
 }
-
 // Close popup
 document.getElementById('close-button').addEventListener('click', function() {
   document.getElementById('popup').style.display = 'none';
@@ -5124,22 +5120,8 @@ let deadline = localStorage.getItem('deadline');
 if (!deadline) {
   deadline = new Date().getTime() + 15 * 60 * 1000; // 15 minutes from now
   localStorage.setItem('deadline', deadline);
-}
-
-function updateCountdown() {
-  let now = new Date().getTime();
-  let distance = deadline - now;
-
-  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  countdown.innerHTML = `Offer expires in ${minutes}m ${seconds}s`;
-
-  if (distance < 0) {
-    clearInterval(interval);
-    countdown.innerHTML = "Offer expired";
-    localStorage.removeItem('deadline'); // Remove the expired deadline from localStorage
-  }
+} else {
+  deadline = Number(deadline); // Convert the retrieved deadline back to a number
 }
 
 let interval = setInterval(updateCountdown, 1000);
